@@ -5,7 +5,7 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
-  const links = ["Home", "Men", "Women", "Kids", "Uniform"];
+  const links = ["Home", "Men", "Women", "Kids", "Uniform", "Contact", "FAQ", "VIP"];
 
   return (
     <nav className="fixed top-0 w-full px-4 md:px-12 py-4 md:py-8 flex flex-col md:flex-row justify-between items-center z-[1000] mix-blend-difference transition-all duration-300">
