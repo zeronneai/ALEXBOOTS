@@ -4,7 +4,7 @@ import { SOCIALS } from '../constants';
 const Footer: React.FC = () => {
   return (
     <footer className="bg-bg-color py-24 px-8 text-center border-t border-[#1a1a1a] relative z-[2]">
-      <div className="font-western text-5xl text-[#333] mb-8 inline-block">
+      <div className="font-display text-5xl text-[#333] mb-8 inline-block">
         ALEX BOOTS
       </div>
       <p className="text-[#666] mb-8 uppercase tracking-widest text-xs">

@@ -31,7 +31,7 @@ const Categories: React.FC<CategoriesProps> = ({ onOpenCategory }) => {
           }}
           onClick={() => onOpenCategory(cat.title)}
         >
-          <h2 className="relative z-[2] font-western text-4xl text-white uppercase tracking-[4px] md:-rotate-90 whitespace-nowrap transition-all duration-400 drop-shadow-xl group-hover:rotate-0 group-hover:text-accent-gold group-hover:text-5xl md:group-hover:text-6xl">
+          <h2 className="relative z-[2] font-display text-4xl text-white uppercase tracking-[4px] md:-rotate-90 whitespace-nowrap transition-all duration-400 drop-shadow-xl group-hover:rotate-0 group-hover:text-accent-gold group-hover:text-5xl md:group-hover:text-6xl">
             {cat.id}
           </h2>
         </div>

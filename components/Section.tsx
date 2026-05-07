@@ -157,7 +157,7 @@ const Section = forwardRef<HTMLDivElement, SectionProps>(({ data, onOpenCatalog 
           />
         )}
         
-        <h1 className="big-title font-western text-[5vw] text-gold leading-none mb-5 drop-shadow-xl translate-y-[50px] opacity-0 whitespace-pre-line">
+        <h1 className="big-title font-display text-[5vw] text-gold leading-none mb-5 drop-shadow-xl translate-y-[50px] opacity-0 whitespace-pre-line">
           {data.title}
         </h1>
         

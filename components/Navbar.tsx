@@ -10,7 +10,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
   return (
     <nav className="fixed top-0 w-full px-4 md:px-12 py-4 md:py-8 flex flex-col md:flex-row justify-between items-center z-[1000] mix-blend-difference transition-all duration-300">
       <div 
-        className="font-western text-xl md:text-2xl text-gold uppercase interactive cursor-pointer mb-3 md:mb-0" 
+        className="font-display text-xl md:text-2xl text-gold uppercase interactive cursor-pointer mb-3 md:mb-0"
         onClick={() => onNavigate(0)}
       >
         AB 1985
