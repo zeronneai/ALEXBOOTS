@@ -28,7 +28,7 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
 
   return (
     <div ref={containerRef} className="fixed top-0 left-0 w-full h-full bg-black z-[2000] flex flex-col justify-center items-center">
-      <div ref={textRef} className="font-western text-gold text-5xl mb-5 whitespace-nowrap">
+      <div ref={textRef} className="font-display text-gold text-5xl mb-5 whitespace-nowrap">
         ALEX BOOTS
       </div>
       <div ref={barRef} className="w-0 h-[2px] bg-gold" />

@@ -234,7 +234,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({ isOpen, category, onClose
       </div>
 
       <div ref={contentRef} className="w-full h-full flex flex-col justify-center items-center opacity-0 px-4 md:px-10 py-10">
-        <h2 className="font-western text-3xl md:text-5xl text-accent-gold mb-8 uppercase tracking-[0.1em] whitespace-pre-line text-center">
+        <h2 className="font-display text-3xl md:text-5xl text-accent-gold mb-8 uppercase tracking-[0.1em] whitespace-pre-line text-center">
           {displayTitle}
         </h2>
 
@@ -258,7 +258,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({ isOpen, category, onClose
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-90" />
                 
                 <div className="absolute bottom-0 left-0 w-full p-8 flex flex-col justify-end items-center">
-                  <h3 className="font-western text-xl md:text-2xl text-gold tracking-widest text-center transform translate-y-2 opacity-80 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 drop-shadow-lg">
+                  <h3 className="font-display text-xl md:text-2xl text-gold tracking-widest text-center transform translate-y-2 opacity-80 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 drop-shadow-lg">
                     {item.title}
                   </h3>
                   {item.actionTarget && (
