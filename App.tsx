@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { SECTIONS_DATA } from './constants';
+import { useProducts } from './src/hooks/useProducts';
+import { useCart } from './src/hooks/useCart';
 
 import Navbar from './components/Navbar';
 import Cursor from './components/Cursor';
@@ -12,6 +14,9 @@ const App: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const { products } = useProducts();
+  const { addToCart, loading: cartLoading } = useCart();
 
   // We use a ref for logic to avoid stale closures in event listeners
   const currentIndexRef = useRef(0);
@@ -122,10 +127,13 @@ const App: React.FC = () => {
       <div className="noise" />
       <Cursor />
       <Loader onComplete={handleLoaderComplete} />
-      <CategoryModal 
-        isOpen={isModalOpen} 
-        category={selectedCategory} 
-        onClose={() => setIsModalOpen(false)} 
+      <CategoryModal
+        isOpen={isModalOpen}
+        category={selectedCategory}
+        onClose={() => setIsModalOpen(false)}
+        products={products}
+        onAddToCart={addToCart}
+        cartLoading={cartLoading}
       />
       
       <Navbar onNavigate={goToSection} />
