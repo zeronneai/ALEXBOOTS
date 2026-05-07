@@ -15,8 +15,10 @@ const App: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  const { products } = useProducts();
+  const { products, loading: productsLoading, error: productsError } = useProducts();
   const { addToCart, loading: cartLoading } = useCart();
+
+  console.log('[Shopify] products:', products, '| loading:', productsLoading, '| error:', productsError);
 
   // We use a ref for logic to avoid stale closures in event listeners
   const currentIndexRef = useRef(0);
