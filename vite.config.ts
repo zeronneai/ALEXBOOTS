@@ -8,6 +8,17 @@ export default defineConfig(({ mode }) => {
       server: {
         port: 3000,
         host: '0.0.0.0',
+        proxy: {
+          '/api/shopify': {
+            target: `https://${env.VITE_SHOPIFY_STORE_DOMAIN}`,
+            changeOrigin: true,
+            rewrite: () => '/api/2024-01/graphql.json',
+            headers: {
+              'X-Shopify-Storefront-Access-Token':
+                env.SHOPIFY_PRIVATE_TOKEN || env.VITE_SHOPIFY_STOREFRONT_TOKEN,
+            },
+          },
+        },
       },
       plugins: [react()],
       define: {

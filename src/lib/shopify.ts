@@ -1,6 +1,6 @@
-const STORE_DOMAIN = import.meta.env.VITE_SHOPIFY_STORE_DOMAIN as string;
-const STOREFRONT_TOKEN = import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN as string;
-const API_URL = `https://${STORE_DOMAIN}/api/2024-01/graphql.json`;
+// All Shopify GraphQL calls go through /api/shopify (Vercel serverless proxy)
+// so no credentials or store domain are exposed to the browser.
+const API_URL = '/api/shopify';
 
 export async function fetchShopify<T = unknown>(
   query: string,
@@ -8,15 +8,12 @@ export async function fetchShopify<T = unknown>(
 ): Promise<T> {
   const res = await fetch(API_URL, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Shopify-Storefront-Access-Token': STOREFRONT_TOKEN,
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ query, variables }),
   });
 
   if (!res.ok) {
-    throw new Error(`Shopify request failed: ${res.status} ${res.statusText}`);
+    throw new Error(`Shopify proxy error: ${res.status} ${res.statusText}`);
   }
 
   const json = await res.json();
