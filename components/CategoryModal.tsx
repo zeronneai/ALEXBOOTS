@@ -8,7 +8,8 @@ interface CategoryModalProps {
   category: string | null;
   onClose: () => void;
   products: ShopifyProduct[];
-  onAddToCart: (variantId: string) => Promise<string>;
+  onAddToCart: (variantId: string) => Promise<void>;
+  onCartOpen: () => void;
   cartLoading: boolean;
 }
 
@@ -18,7 +19,7 @@ interface CatalogItem {
   actionTarget?: string;
 }
 
-// ─── Helpers ────────────────────────────────────────────────────────────────
+// ─── Helpers ──────────────────────────────────────────────────────────────────────
 
 function formatPrice(price: { amount: string; currencyCode: string }): string {
   return new Intl.NumberFormat('en-US', {
@@ -36,7 +37,7 @@ function findProduct(itemTitle: string, products: ShopifyProduct[]): ShopifyProd
   });
 }
 
-// ─── Product Detail View ─────────────────────────────────────────────────────
+// ─── Product Detail View ───────────────────────────────────────────────────────────────
 
 interface ProductViewState {
   product: ShopifyProduct;
@@ -143,7 +144,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
   );
 };
 
-// ─── Main Component ──────────────────────────────────────────────────────────
+// ─── Main Component ─────────────────────────────────────────────────────────────────────
 
 const CategoryModal: React.FC<CategoryModalProps> = ({
   isOpen,
@@ -151,6 +152,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
   onClose,
   products,
   onAddToCart,
+  onCartOpen,
   cartLoading,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
@@ -160,7 +162,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
   const [viewStack, setViewStack] = useState<string[]>([]);
   const [productView, setProductView] = useState<ProductViewState | null>(null);
 
-  // ── Catalog data ───────────────────────────────────────────────────────────
+  // ── Catalog data ──────────────────────────────────────────────────────────────
 
   const rootItems: CatalogItem[] = [
     { title: "MEN'S COLLECTION", img: ASSETS.MEN_BG, actionTarget: "MEN" },
@@ -215,7 +217,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
     { title: "WORK", img: "https://images.unsplash.com/photo-1605034313761-73ea4a0cfbf3?q=80&w=2787&auto=format&fit=crop" },
   ];
 
-  // ── Lifecycle ──────────────────────────────────────────────────────────────
+  // ── Lifecycle ──────────────────────────────────────────────────────────────────
 
   useEffect(() => {
     if (isOpen && category) {
@@ -242,7 +244,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
     }
   }, [isOpen, category]);
 
-  // ── Navigation ─────────────────────────────────────────────────────────────
+  // ── Navigation ─────────────────────────────────────────────────────────────────
 
   const animateTransition = (callback: () => void) => {
     if (itemsContainerRef.current) {
@@ -265,7 +267,6 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
     if (item.actionTarget) {
       animateTransition(() => setViewStack(prev => [...prev, item.actionTarget!]));
     } else {
-      // Leaf item — open product detail if a matching Shopify product exists
       const product = findProduct(item.title, products);
       if (product) {
         const firstAvailable =
@@ -291,14 +292,15 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
   const handleAddToCart = async () => {
     if (!productView?.selectedVariantId) return;
     try {
-      const checkoutUrl = await onAddToCart(productView.selectedVariantId);
-      window.location.href = checkoutUrl;
+      await onAddToCart(productView.selectedVariantId);
+      onClose();
+      onCartOpen();
     } catch {
-      // error is surfaced via cartLoading / error state in parent
+      // error surfaced via cartLoading state in parent
     }
   };
 
-  // ── Render helpers ─────────────────────────────────────────────────────────
+  // ── Render helpers ───────────────────────────────────────────────────────────────
 
   const getCurrentViewData = () => {
     const currentView = viewStack[viewStack.length - 1];
@@ -318,7 +320,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
   const { title: displayTitle, items: currentItems } = getCurrentViewData();
   const canGoBack = viewStack.length > 1 || !!productView;
 
-  // ── JSX ────────────────────────────────────────────────────────────────────
+  // ── JSX ─────────────────────────────────────────────────────────────────────────
 
   return (
     <div
@@ -401,7 +403,6 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
                       {item.title}
                     </h3>
 
-                    {/* Price badge — only when Shopify product is matched */}
                     {shopifyProduct && (
                       <p className="font-main text-[11px] text-white/70 tracking-[2px] mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                         {formatPrice(shopifyProduct.priceRange.minVariantPrice)}
