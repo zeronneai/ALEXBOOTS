@@ -162,6 +162,7 @@ const App: React.FC = () => {
         onShopClick={openShop}
         onCartClick={() => setIsCartOpen(true)}
         itemCount={itemCount}
+        isCartOpen={isCartOpen}
       />
 
       {/* Category modal (section catalog browsing) */}

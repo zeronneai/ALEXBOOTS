@@ -28,56 +28,62 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
 
   return (
     <>
-      {/* Backdrop */}
+      {/* Overlay — sits above navbar (z-[2100]) so mix-blend-difference can't bleed through */}
       <div
         onClick={onClose}
-        className={`fixed inset-0 bg-black/75 z-[1900] transition-opacity duration-300
+        style={{ zIndex: 9998 }}
+        className={`fixed inset-0 bg-black/70 transition-opacity duration-300
           ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
       />
 
-      {/* Drawer panel — full width on mobile, 400px on desktop */}
+      {/* Drawer panel */}
       <div
-        className={`fixed top-0 right-0 h-full w-full md:max-w-[400px] bg-[#0a0806] z-[2000]
-          flex flex-col transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]
+        style={{ zIndex: 9999, backgroundColor: '#0a0a0a' }}
+        className={`fixed top-0 right-0 h-screen w-screen md:w-[400px] flex flex-col
+          transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]
           ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
 
-        {/* ── HEADER ─────────────────────────────────────────────────────── */}
-        <div className="flex-shrink-0 flex items-center justify-between px-6 py-5 border-b border-white/8">
-          <div>
-            <h2 className="font-display text-sm text-gold uppercase tracking-[0.3em]">
-              Your Cart
-            </h2>
-            <p className="font-main text-[10px] text-white/30 tracking-[2px] mt-1 uppercase">
-              {itemCount === 0 ? 'Empty' : `${itemCount} item${itemCount !== 1 ? 's' : ''}`}
-            </p>
-          </div>
+        {/* ── HEADER — 60px, gold border ──────────────────────────────────── */}
+        <div
+          className="flex-shrink-0 flex items-center justify-between px-6"
+          style={{ height: 60, borderBottom: '1px solid #d4af37' }}
+        >
+          <h2 className="font-display text-sm uppercase tracking-[0.3em]" style={{ color: '#d4af37' }}>
+            YOUR CART
+            {itemCount > 0 && (
+              <span className="font-main text-[10px] text-white/40 tracking-[2px] ml-3 normal-case">
+                {itemCount} item{itemCount !== 1 ? 's' : ''}
+              </span>
+            )}
+          </h2>
 
-          {/* Close button — min 44×44px for touch targets */}
           <button
             onClick={onClose}
             aria-label="Close cart"
-            className="w-11 h-11 flex items-center justify-center text-white/40 hover:text-white transition-colors duration-200 interactive flex-shrink-0 -mr-2"
+            className="flex items-center gap-2 interactive"
+            style={{ color: 'rgba(255,255,255,0.5)', minWidth: 44, minHeight: 44 }}
           >
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-              <line x1="2" y1="2" x2="16" y2="16" />
-              <line x1="16" y1="2" x2="2" y2="16" />
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+              <line x1="1" y1="1" x2="15" y2="15" />
+              <line x1="15" y1="1" x2="1" y2="15" />
             </svg>
+            <span className="font-main text-[9px] uppercase tracking-[2px]">CLOSE</span>
           </button>
         </div>
 
-        {/* ── BODY — scrollable list ──────────────────────────────────────── */}
+        {/* ── BODY — flex:1, scrollable ───────────────────────────────────── */}
         <div
           className="flex-1 overflow-y-auto px-6 py-4"
           style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
         >
           {lines.length === 0 ? (
-            <div className="h-full flex flex-col items-center justify-center text-center py-16">
-              <div className="w-10 h-[1px] bg-gold/15 mb-8" />
-              <p className="font-display text-lg text-white/12 uppercase tracking-[0.25em] mb-2">
+            <div className="h-full flex flex-col items-center justify-center text-center">
+              <div style={{ width: 40, height: 1, backgroundColor: 'rgba(212,175,55,0.15)', marginBottom: 32 }} />
+              <p className="font-display text-base uppercase tracking-[0.25em] mb-2" style={{ color: 'rgba(255,255,255,0.12)' }}>
                 Empty
               </p>
-              <p className="font-main text-[10px] text-white/20 tracking-[3px] uppercase">
+              <p className="font-main text-[10px] tracking-[3px] uppercase" style={{ color: 'rgba(255,255,255,0.2)' }}>
                 Add products to get started
               </p>
             </div>
@@ -86,48 +92,47 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
               {lines.map((line, i) => (
                 <div
                   key={line.id}
-                  className={`flex gap-4 items-start py-5 ${i < lines.length - 1 ? 'border-b border-white/5' : ''}`}
+                  className="flex gap-4 items-start py-5"
+                  style={i < lines.length - 1 ? { borderBottom: '1px solid rgba(255,255,255,0.05)' } : {}}
                 >
-                  {/* Thumbnail */}
-                  <div className="w-[58px] h-[74px] flex-shrink-0 bg-white/4 overflow-hidden">
+                  <div className="flex-shrink-0 overflow-hidden" style={{ width: 58, height: 74, backgroundColor: 'rgba(255,255,255,0.04)' }}>
                     {line.imageUrl
                       ? <img src={line.imageUrl} alt={line.productTitle} className="w-full h-full object-cover" />
-                      : <div className="w-full h-full bg-white/5" />
+                      : <div className="w-full h-full" style={{ backgroundColor: 'rgba(255,255,255,0.05)' }} />
                     }
                   </div>
 
-                  {/* Info */}
                   <div className="flex-1 min-w-0">
-                    <p className="font-display text-[11px] text-white/80 uppercase tracking-widest leading-snug mb-1 pr-2">
+                    <p className="font-display text-[11px] uppercase tracking-widest leading-snug mb-1 pr-2" style={{ color: 'rgba(255,255,255,0.8)' }}>
                       {line.productTitle}
                     </p>
                     {line.variantTitle !== 'Default Title' && (
-                      <p className="font-main text-[10px] text-white/35 tracking-[2px] mb-2">
+                      <p className="font-main text-[10px] tracking-[2px] mb-2" style={{ color: 'rgba(255,255,255,0.35)' }}>
                         {line.variantTitle}
                       </p>
                     )}
                     <div className="flex items-center gap-3">
-                      <p className="font-main text-gold text-[11px] tracking-[2px]">
+                      <p className="font-main text-[11px] tracking-[2px]" style={{ color: '#d4af37' }}>
                         {fmt(line.price.amount, line.price.currencyCode)}
                       </p>
                       {line.quantity > 1 && (
-                        <p className="font-main text-white/25 text-[10px] tracking-widest">
+                        <p className="font-main text-[10px] tracking-widest" style={{ color: 'rgba(255,255,255,0.25)' }}>
                           × {line.quantity}
                         </p>
                       )}
                     </div>
                   </div>
 
-                  {/* Remove — 44×44px tap area */}
                   <button
                     onClick={() => onRemove(line.id)}
                     disabled={loading}
                     aria-label="Remove item"
-                    className="w-11 h-11 flex items-center justify-center text-white/20 hover:text-white/60 transition-colors duration-200 interactive flex-shrink-0 -mr-2"
+                    className="flex items-center justify-center interactive flex-shrink-0"
+                    style={{ width: 44, height: 44, color: 'rgba(255,255,255,0.2)', marginRight: -8 }}
                   >
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-                      <line x1="1" y1="1" x2="13" y2="13" />
-                      <line x1="13" y1="1" x2="1" y2="13" />
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                      <line x1="1" y1="1" x2="11" y2="11" />
+                      <line x1="11" y1="1" x2="1" y2="11" />
                     </svg>
                   </button>
                 </div>
@@ -136,51 +141,59 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
           )}
         </div>
 
-        {/* ── FOOTER — always visible at bottom ──────────────────────────── */}
-        <div className="flex-shrink-0 border-t border-white/8 px-6 pt-5 pb-6">
+        {/* ── FOOTER — always visible ───────────────────────────────────── */}
+        <div className="flex-shrink-0 px-6" style={{ paddingTop: 20, paddingBottom: 28, borderTop: '1px solid rgba(255,255,255,0.08)' }}>
           {lines.length > 0 ? (
             <>
-              {/* Subtotal row */}
+              {/* Empty cart — top of footer, small red */}
+              <div className="flex justify-end mb-4">
+                <button
+                  onClick={handleEmptyCart}
+                  disabled={loading}
+                  className="font-main text-[9px] uppercase tracking-[2px] interactive disabled:opacity-30"
+                  style={{ color: 'rgba(248,113,113,0.5)' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = 'rgb(248,113,113)')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(248,113,113,0.5)')}
+                >
+                  EMPTY CART
+                </button>
+              </div>
+
+              <div style={{ height: 1, backgroundColor: 'rgba(255,255,255,0.06)', marginBottom: 20 }} />
+
+              {/* Total */}
               {total && (
                 <div className="flex justify-between items-baseline mb-5">
-                  <span className="font-main text-[10px] text-white/30 tracking-[3px] uppercase">
-                    Subtotal
+                  <span className="font-main text-[10px] uppercase tracking-[3px]" style={{ color: 'rgba(255,255,255,0.3)' }}>
+                    Total
                   </span>
-                  <span className="font-display text-2xl text-white tracking-wide">
+                  <span className="font-display text-2xl tracking-wide" style={{ color: '#ffffff' }}>
                     {fmt(total.amount, total.currencyCode)}
                   </span>
                 </div>
               )}
 
-              {/* Checkout CTA */}
+              {/* Checkout */}
               <button
                 onClick={() => checkoutUrl && (window.location.href = checkoutUrl)}
                 disabled={!checkoutUrl || loading}
-                className="w-full py-4 bg-gold text-black font-display text-sm uppercase tracking-[4px] hover:bg-white transition-colors duration-300 disabled:opacity-40 disabled:cursor-not-allowed interactive mb-3"
+                className="w-full font-display text-sm uppercase tracking-[4px] interactive disabled:opacity-40 disabled:cursor-not-allowed transition-colors duration-300"
+                style={{ padding: '16px 0', backgroundColor: '#d4af37', color: '#000000' }}
+                onMouseEnter={e => !e.currentTarget.disabled && (e.currentTarget.style.backgroundColor = '#ffffff')}
+                onMouseLeave={e => !e.currentTarget.disabled && (e.currentTarget.style.backgroundColor = '#d4af37')}
               >
                 {loading ? 'PROCESSING…' : 'CHECKOUT →'}
               </button>
-
-              {/* Empty cart — small, destructive, discrete */}
-              <div className="flex items-center justify-between">
-                <p className="font-main text-[9px] text-white/18 tracking-[2px] uppercase">
-                  Secure checkout via Shopify
-                </p>
-                <button
-                  onClick={handleEmptyCart}
-                  disabled={loading}
-                  className="font-main text-[9px] text-red-400/50 hover:text-red-400 tracking-[2px] uppercase transition-colors duration-200 interactive disabled:opacity-30"
-                >
-                  Empty cart
-                </button>
-              </div>
             </>
           ) : (
             <button
               onClick={onClose}
-              className="w-full py-4 border border-gold/30 text-gold/60 font-display text-sm uppercase tracking-[4px] hover:border-gold hover:text-gold transition-colors duration-300 interactive"
+              className="w-full font-display text-sm uppercase tracking-[4px] interactive transition-colors duration-300"
+              style={{ padding: '16px 0', border: '1px solid rgba(212,175,55,0.3)', color: 'rgba(212,175,55,0.6)' }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = '#d4af37'; e.currentTarget.style.color = '#d4af37'; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(212,175,55,0.3)'; e.currentTarget.style.color = 'rgba(212,175,55,0.6)'; }}
             >
-              Continue Shopping
+              CONTINUE SHOPPING
             </button>
           )}
         </div>
