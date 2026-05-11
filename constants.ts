@@ -1,13 +1,13 @@
 
 export const ASSETS = {
-  LOGO_ICON: "https://res.cloudinary.com/dsprn0ew4/image/upload/v1770659719/ChatGPT_Image_Feb_9_2026_11_54_22_AM_tc6n1w.png",
+  LOGO_ICON: "https://res.cloudinary.com/dsprn0ew4/image/upload/v1778536281/ChatGPT_Image_May_11_2026_03_50_31_PM_mljyx4.png",
   HERO_BG: "https://res.cloudinary.com/dsprn0ew4/image/upload/v1770662473/Generate_an_image_4k_202602091232_rhvqcj.jpg",
   MEN_BG: "https://res.cloudinary.com/dsprn0ew4/image/upload/v1770663886/Image_202602091253_qbxi2p.jpg",
   WOMEN_BG: "https://res.cloudinary.com/dsprn0ew4/image/upload/v1770663880/A_cinematic_fashion_4k_202602091301_xongup.jpg",
   KIDS_BG: "https://res.cloudinary.com/dsprn0ew4/image/upload/v1770663880/Cute_little_kid_4k_202602091255_z7wnqp.jpg",
   UNIFORM_BG: "https://res.cloudinary.com/dsprn0ew4/image/upload/v1770663892/Heavy_duty_work_4k_202602091255_mmfe4i.jpg",
   VIDEO_BG: "https://assets.mixkit.co/videos/preview/mixkit-western-landscape-view-4009-large.mp4",
-  LOGO: "https://res.cloudinary.com/dsprn0ew4/image/upload/v1770659719/ChatGPT_Image_Feb_9_2026_11_54_22_AM_tc6n1w.png",
+  LOGO: "https://res.cloudinary.com/dsprn0ew4/image/upload/v1778536281/ChatGPT_Image_May_11_2026_03_50_31_PM_mljyx4.png",
   CAT_MEN: "https://images.unsplash.com/photo-1533633355057-0b639912c337?q=80&w=1974&auto=format&fit=crop",
   CAT_WOMEN: "https://images.unsplash.com/photo-1549637642-90187f64f420?q=80&w=2948&auto=format&fit=crop",
   CAT_KIDS: "https://images.unsplash.com/photo-1603145733190-59811e523c72?q=80&w=2940&auto=format&fit=crop",
@@ -67,8 +67,8 @@ export const SECTIONS_DATA = [
     id: 5,
     title: "CONTACT\nUS",
     subtitle: "¿Tienes preguntas o pedidos personalizados? Estamos listos para atenderte.",
-    img: "https://images.unsplash.com/photo-1447968954315-3f0c44f7313c?q=80&w=2787&auto=format&fit=crop", 
-    button: "", 
+    img: "https://images.unsplash.com/photo-1447968954315-3f0c44f7313c?q=80&w=2787&auto=format&fit=crop",
+    button: "",
     align: "center",
     isContact: true
   },
@@ -76,7 +76,7 @@ export const SECTIONS_DATA = [
     id: 6,
     title: "FREQUENT\nQUESTIONS",
     subtitle: "Todo lo que necesitas saber antes de tu próxima adquisición.",
-    img: "https://images.unsplash.com/photo-1612459954497-6a107386d9a1?q=80&w=2787&auto=format&fit=crop", // Leather texture detail
+    img: "https://images.unsplash.com/photo-1612459954497-6a107386d9a1?q=80&w=2787&auto=format&fit=crop",
     button: "",
     align: "left",
     isFaq: true,
@@ -98,8 +98,8 @@ export const SECTIONS_DATA = [
   {
     id: 7,
     title: "VIP\nACCESS",
-    subtitle: "Únete al Club AlexBoots.",
-    img: "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=2787&auto=format&fit=crop", // Dark moody atmosphere
+    subtitle: "Únete al Club Ranchers.",
+    img: "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=2787&auto=format&fit=crop",
     button: "",
     align: "center",
     isNewsletter: true

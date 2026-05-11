@@ -20,54 +20,93 @@ const SECTION_LINKS = [
 ];
 
 const Navbar: React.FC<NavbarProps> = ({ onNavigate, onShopClick, onCartClick, itemCount }) => (
-  <nav className="fixed top-0 w-full px-4 md:px-12 py-4 md:py-8 flex flex-col md:flex-row justify-between items-center z-[2100] mix-blend-difference transition-all duration-300">
-    {/* Brand */}
-    <div
-      className="font-display text-xl md:text-2xl text-gold uppercase interactive cursor-pointer mb-3 md:mb-0"
-      onClick={() => onNavigate(0)}
-    >
-      AB 1985
+  <nav className="fixed top-0 w-full z-[2100] mix-blend-difference transition-all duration-300">
+    {/* Top row: brand + cart */}
+    <div className="flex justify-between items-center px-4 md:px-12 pt-4 md:pt-8 pb-2 md:pb-0">
+      <div
+        className="font-display text-base md:text-2xl text-gold uppercase interactive cursor-pointer"
+        onClick={() => onNavigate(0)}
+      >
+        RB CO.
+      </div>
+
+      {/* Mobile: Shop + Cart */}
+      <div className="flex items-center gap-4 md:hidden">
+        <button
+          onClick={onShopClick}
+          className="text-white font-display text-[9px] uppercase tracking-[2px] bg-transparent border-none cursor-pointer interactive"
+        >
+          Shop
+        </button>
+        <button
+          onClick={onCartClick}
+          className="relative text-white interactive cursor-pointer bg-transparent border-none flex items-center"
+          aria-label="Open cart"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          {itemCount > 0 && (
+            <span className="absolute -top-2 -right-2 w-4 h-4 bg-gold text-black font-main text-[8px] font-bold rounded-full flex items-center justify-center leading-none">
+              {itemCount > 9 ? '9+' : itemCount}
+            </span>
+          )}
+        </button>
+      </div>
+
+      {/* Desktop: full link row */}
+      <div className="hidden md:flex gap-6 items-center">
+        {SECTION_LINKS.map(({ label, index }) => (
+          <button
+            key={label}
+            onClick={() => onNavigate(index)}
+            className="text-white font-display text-sm uppercase tracking-widest relative interactive group bg-transparent border-none cursor-pointer"
+          >
+            {label}
+            <span className="absolute bottom-[-5px] left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full" />
+          </button>
+        ))}
+
+        <button
+          onClick={onShopClick}
+          className="text-white font-display text-sm uppercase tracking-widest relative interactive group bg-transparent border-none cursor-pointer"
+        >
+          Shop
+          <span className="absolute bottom-[-5px] left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full" />
+        </button>
+
+        <button
+          onClick={onCartClick}
+          className="relative text-white interactive cursor-pointer bg-transparent border-none flex items-center gap-1 group"
+          aria-label="Open cart"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:stroke-[#d4af37] transition-colors duration-300">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          {itemCount > 0 && (
+            <span className="absolute -top-2 -right-2 w-4 h-4 bg-gold text-black font-main text-[8px] font-bold rounded-full flex items-center justify-center leading-none">
+              {itemCount > 9 ? '9+' : itemCount}
+            </span>
+          )}
+        </button>
+      </div>
     </div>
 
-    {/* Links */}
-    <div className="flex gap-3 md:gap-6 flex-wrap justify-center items-center">
+    {/* Mobile: section links horizontal scroll */}
+    <div className="md:hidden flex gap-4 px-4 pb-3 overflow-x-auto" style={{ scrollbarWidth: 'none' }}>
       {SECTION_LINKS.map(({ label, index }) => (
         <button
           key={label}
           onClick={() => onNavigate(index)}
-          className="text-white no-underline font-display text-[10px] md:text-sm uppercase tracking-widest relative interactive group bg-transparent border-none cursor-pointer whitespace-nowrap"
+          className="text-white font-display text-[9px] uppercase tracking-[2px] bg-transparent border-none cursor-pointer interactive flex-shrink-0 whitespace-nowrap"
         >
           {label}
-          <span className="absolute bottom-[-3px] md:bottom-[-5px] left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full" />
         </button>
       ))}
-
-      {/* Shop — opens ShopView overlay */}
-      <button
-        onClick={onShopClick}
-        className="text-white no-underline font-display text-[10px] md:text-sm uppercase tracking-widest relative interactive group bg-transparent border-none cursor-pointer whitespace-nowrap"
-      >
-        Shop
-        <span className="absolute bottom-[-3px] md:bottom-[-5px] left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full" />
-      </button>
-
-      {/* Cart icon */}
-      <button
-        onClick={onCartClick}
-        className="relative text-white interactive cursor-pointer bg-transparent border-none flex items-center gap-1 group"
-        aria-label="Open cart"
-      >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:stroke-[#d4af37] transition-colors duration-300">
-          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-          <line x1="3" y1="6" x2="21" y2="6"/>
-          <path d="M16 10a4 4 0 0 1-8 0"/>
-        </svg>
-        {itemCount > 0 && (
-          <span className="absolute -top-2 -right-2 w-4 h-4 bg-gold text-black font-main text-[8px] font-bold rounded-full flex items-center justify-center leading-none">
-            {itemCount > 9 ? '9+' : itemCount}
-          </span>
-        )}
-      </button>
     </div>
   </nav>
 );
