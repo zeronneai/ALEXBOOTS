@@ -9,16 +9,18 @@ import Cursor from './components/Cursor';
 import Loader from './components/Loader';
 import Section from './components/Section';
 import CategoryModal from './components/CategoryModal';
+import ProductsGrid from './components/ProductsGrid';
+
+// Hero (0) + ProductsGrid (1) + 8 SECTIONS_DATA sections = 9 total
+const TOTAL_SECTIONS = SECTIONS_DATA.length + 1;
 
 const App: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  const { products, loading: productsLoading, error: productsError } = useProducts();
+  const { products, loading: productsLoading } = useProducts();
   const { addToCart, loading: cartLoading } = useCart();
-
-  console.log('[Shopify] products:', products, '| loading:', productsLoading, '| error:', productsError);
 
   // We use a ref for logic to avoid stale closures in event listeners
   const currentIndexRef = useRef(0);
@@ -44,13 +46,12 @@ const App: React.FC = () => {
   };
 
   const handleOpenCatalog = (categoryTitle: string) => {
-    console.log('Click detectado');
     setSelectedCategory(categoryTitle);
     setIsModalOpen(true);
   };
 
   const goToSection = (index: number) => {
-    if (isAnimating.current || index === currentIndexRef.current || index < 0 || index >= SECTIONS_DATA.length) return;
+    if (isAnimating.current || index === currentIndexRef.current || index < 0 || index >= TOTAL_SECTIONS) return;
     
     isAnimating.current = true;
     const direction = index > currentIndexRef.current ? 1 : -1;
@@ -71,7 +72,7 @@ const App: React.FC = () => {
     const nextTitle = nextSection.querySelector('.big-title');
     const nextSub = nextSection.querySelector('.subtitle');
     const nextBtn = nextSection.querySelector('.btn-western');
-    const nextCustom = nextSection.querySelector('.custom-content'); // Matches FAQ, Contact Icons, Newsletter
+    const nextCustom = nextSection.querySelector('.custom-content');
     const nextLogo = nextSection.querySelector('.floating-logo');
     
     gsap.set([nextTitle, nextSub, nextBtn, nextLogo, nextCustom].filter(Boolean), { opacity: 0, y: 50 });
@@ -142,8 +143,8 @@ const App: React.FC = () => {
 
       {/* Side Indicators */}
       <div className="fixed right-10 top-1/2 -translate-y-1/2 flex flex-col gap-5 z-[1000]">
-        {SECTIONS_DATA.map((_, idx) => (
-          <div 
+        {Array.from({ length: TOTAL_SECTIONS }).map((_, idx) => (
+          <div
             key={idx}
             onClick={() => goToSection(idx)}
             className={`w-[10px] h-[10px] border border-white/30 rounded-full transition-all duration-300 interactive cursor-pointer
@@ -154,12 +155,30 @@ const App: React.FC = () => {
       </div>
 
       <div className="w-full h-full relative">
-        {SECTIONS_DATA.map((section, index) => (
-          <Section 
-            key={section.id} 
-            data={section} 
+        {/* Section 0: Hero */}
+        <Section
+          key={SECTIONS_DATA[0].id}
+          data={SECTIONS_DATA[0]}
+          onOpenCatalog={() => handleOpenCatalog(SECTIONS_DATA[0].title)}
+          ref={(el) => { sectionsRef.current[0] = el; }}
+        />
+
+        {/* Section 1: Products Grid */}
+        <ProductsGrid
+          ref={(el) => { sectionsRef.current[1] = el; }}
+          products={products}
+          loading={productsLoading}
+          onAddToCart={addToCart}
+          cartLoading={cartLoading}
+        />
+
+        {/* Sections 2-8: remaining catalog/contact/faq/vip */}
+        {SECTIONS_DATA.slice(1).map((section, i) => (
+          <Section
+            key={section.id}
+            data={section}
             onOpenCatalog={() => handleOpenCatalog(section.title)}
-            ref={(el) => { sectionsRef.current[index] = el; }}
+            ref={(el) => { sectionsRef.current[i + 2] = el; }}
           />
         ))}
       </div>
