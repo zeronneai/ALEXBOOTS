@@ -1,5 +1,3 @@
-// All Shopify GraphQL calls go through /api/shopify (Vercel serverless proxy)
-// so no credentials or store domain are exposed to the browser.
 const API_URL = '/api/shopify';
 
 export async function fetchShopify<T = unknown>(
@@ -13,7 +11,7 @@ export async function fetchShopify<T = unknown>(
   });
 
   if (!res.ok) {
-    throw new Error(`Shopify proxy error: ${res.status} ${res.statusText}`);
+    throw new Error(`Shopify request failed: ${res.status} ${res.statusText}`);
   }
 
   const json = await res.json();
