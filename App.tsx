@@ -121,6 +121,34 @@ const App: React.FC = () => {
     return () => window.removeEventListener('wheel', handleWheel);
   }, [isModalOpen, view]);
 
+  // ── Touch swipe navigation (home only) ───────────────────────────────────
+  useEffect(() => {
+    let startY = 0;
+    let startX = 0;
+
+    const onTouchStart = (e: TouchEvent) => {
+      startY = e.touches[0].clientY;
+      startX = e.touches[0].clientX;
+    };
+
+    const onTouchEnd = (e: TouchEvent) => {
+      if (isModalOpen || view !== 'home') return;
+      const dy = startY - e.changedTouches[0].clientY;
+      const dx = Math.abs(startX - e.changedTouches[0].clientX);
+      // Only trigger vertical swipe when swipe is more vertical than horizontal
+      if (Math.abs(dy) < 50 || dx > Math.abs(dy) * 0.8) return;
+      if (dy > 0) goToSection(currentIndexRef.current + 1);
+      else        goToSection(currentIndexRef.current - 1);
+    };
+
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchend', onTouchEnd, { passive: true });
+    return () => {
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchend', onTouchEnd);
+    };
+  }, [isModalOpen, view]);
+
   // ─────────────────────────────────────────────────────────────────────────
   return (
     <div className="relative w-full h-screen bg-dark-wood overflow-hidden">

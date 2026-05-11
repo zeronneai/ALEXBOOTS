@@ -97,7 +97,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, onShopClick, onCartClick, i
     </div>
 
     {/* Mobile: section links horizontal scroll */}
-    <div className="md:hidden flex gap-4 px-4 pb-3 overflow-x-auto" style={{ scrollbarWidth: 'none' }}>
+    <div className="touch-scroll-x md:hidden flex gap-4 px-4 pb-3">
       {SECTION_LINKS.map(({ label, index }) => (
         <button
           key={label}

@@ -58,7 +58,7 @@ const ProductView: React.FC<ProductViewProps> = ({
 
       <div className="flex flex-col md:flex-row">
 
-        {/* ── Left: Gallery ───────────────────────────────────── */}
+        {/* ── Left: Gallery ─────────────────────────────────────────────── */}
         <div className="w-full md:w-[55%] md:sticky md:top-[57px] md:h-[calc(100vh-57px)] flex flex-col">
           <div className="flex-1 bg-card-bg overflow-hidden" style={{ minHeight: '55vw' }}>
             {images[activeImg] ? (
@@ -77,8 +77,7 @@ const ProductView: React.FC<ProductViewProps> = ({
 
           {images.length > 1 && (
             <div
-              className="flex gap-2 p-3 bg-[#0a0806] overflow-x-auto flex-shrink-0"
-              style={{ scrollbarWidth: 'none' }}
+              className="touch-scroll-x flex gap-2 p-3 bg-[#0a0806] flex-shrink-0"
             >
               {images.map((img, i) => (
                 <button
@@ -94,7 +93,7 @@ const ProductView: React.FC<ProductViewProps> = ({
           )}
         </div>
 
-        {/* ── Right: Details ────────────────────────────────────── */}
+        {/* ── Right: Details ────────────────────────────────────────────────── */}
         <div className="w-full md:w-[45%] px-5 md:px-12 lg:px-16 pt-8 md:pt-12 pb-24 flex flex-col">
           <p className="font-main text-[9px] tracking-[4px] text-gold/40 uppercase mb-3">
             EST. 1985 · EL PASO, TEXAS
