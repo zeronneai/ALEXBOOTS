@@ -15,7 +15,7 @@ export default async function handler(request: Request): Promise<Response> {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-Shopify-Storefront-Access-Token': PRIVATE_TOKEN,
+      'Shopify-Storefront-Private-Token': PRIVATE_TOKEN,
     },
     body,
   });
