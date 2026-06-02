@@ -21,7 +21,10 @@ const SECTION_LINKS = [
 ];
 
 const Navbar: React.FC<NavbarProps> = ({ onNavigate, onShopClick, onCartClick, itemCount, isCartOpen }) => (
-  <nav className={`fixed top-0 w-full z-[2100] transition-all duration-300 ${isCartOpen ? 'opacity-0 pointer-events-none' : 'mix-blend-difference'}`}>
+  <nav
+    style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
+    className={`fixed top-0 w-full z-[2100] transition-all duration-300 ${isCartOpen ? 'opacity-0 pointer-events-none' : 'mix-blend-difference'}`}
+  >
     {/* Top row: brand + cart */}
     <div className="flex justify-between items-center px-4 md:px-12 pt-4 md:pt-8 pb-2 md:pb-0">
       <div

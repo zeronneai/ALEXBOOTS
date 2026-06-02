@@ -36,9 +36,9 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
           ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
       />
 
-      {/* Drawer panel */}
+      {/* Drawer panel — uses 100dvh so the footer stays visible above the mobile browser UI */}
       <div
-        style={{ zIndex: 9999, backgroundColor: '#0a0a0a' }}
+        style={{ zIndex: 9999, backgroundColor: '#0a0a0a', height: '100dvh' }}
         className={`fixed top-0 right-0 h-screen w-screen md:w-[400px] flex flex-col
           transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]
           ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
@@ -141,8 +141,8 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
           )}
         </div>
 
-        {/* ── FOOTER — always visible ───────────────────────────────────── */}
-        <div className="flex-shrink-0 px-6" style={{ paddingTop: 20, paddingBottom: 28, borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+        {/* ── FOOTER — always visible (safe-area aware for iOS home indicator) ── */}
+        <div className="flex-shrink-0 px-6" style={{ paddingTop: 20, paddingBottom: 'calc(24px + env(safe-area-inset-bottom, 0px))', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
           {lines.length > 0 ? (
             <>
               {/* Empty cart — top of footer, small red */}
@@ -177,8 +177,8 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
               <button
                 onClick={() => checkoutUrl && (window.location.href = checkoutUrl)}
                 disabled={!checkoutUrl || loading}
-                className="w-full font-display text-sm uppercase tracking-[4px] interactive disabled:opacity-40 disabled:cursor-not-allowed transition-colors duration-300"
-                style={{ padding: '16px 0', backgroundColor: '#d4af37', color: '#000000' }}
+                className="w-full font-display text-sm uppercase tracking-[4px] whitespace-nowrap interactive disabled:opacity-40 disabled:cursor-not-allowed transition-colors duration-300"
+                style={{ padding: '16px 0', minHeight: 52, backgroundColor: '#d4af37', color: '#000000' }}
                 onMouseEnter={e => !e.currentTarget.disabled && (e.currentTarget.style.backgroundColor = '#ffffff')}
                 onMouseLeave={e => !e.currentTarget.disabled && (e.currentTarget.style.backgroundColor = '#d4af37')}
               >

@@ -15,7 +15,10 @@ function fmt(amount: string, currency: string) {
 const ShopView: React.FC<ShopViewProps> = ({ products, loading, onBack, onSelectProduct }) => (
   <div className="fixed inset-0 bg-dark-wood z-[1500] overflow-y-auto">
     {/* Sticky header */}
-    <div className="sticky top-0 z-10 bg-[#0f0c08]/95 backdrop-blur-sm border-b border-white/5 px-4 md:px-16 py-4 md:py-6 flex items-center justify-between gap-4">
+    <div
+      className="sticky top-0 z-10 bg-[#0f0c08]/95 backdrop-blur-sm border-b border-white/5 px-4 md:px-16 py-4 md:py-6 flex items-center justify-between gap-4"
+      style={{ paddingTop: 'max(1rem, env(safe-area-inset-top, 0px))' }}
+    >
       <button
         onClick={onBack}
         className="font-main text-[10px] tracking-[3px] text-white/40 hover:text-gold transition-colors duration-300 uppercase flex items-center gap-2 interactive flex-shrink-0"

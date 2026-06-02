@@ -47,7 +47,10 @@ const ProductView: React.FC<ProductViewProps> = ({
   return (
     <div className="fixed inset-0 bg-dark-wood z-[1600] overflow-y-auto">
       {/* Sticky back bar */}
-      <div className="sticky top-0 z-20 bg-dark-wood/90 backdrop-blur-sm border-b border-white/5 px-4 md:px-16 py-4 flex items-center">
+      <div
+        className="sticky top-0 z-20 bg-dark-wood/90 backdrop-blur-sm border-b border-white/5 px-4 md:px-16 py-4 flex items-center"
+        style={{ paddingTop: 'max(1rem, env(safe-area-inset-top, 0px))' }}
+      >
         <button
           onClick={onBack}
           className="font-main text-[10px] tracking-[3px] text-white/40 hover:text-gold transition-colors duration-300 uppercase flex items-center gap-2 interactive"
@@ -93,7 +96,7 @@ const ProductView: React.FC<ProductViewProps> = ({
           )}
         </div>
 
-        {/* ── Right: Details ────────────────────────────────────────────────── */}
+        {/* ── Right: Details ───────────────────────────────────────────────── */}
         <div className="w-full md:w-[45%] px-5 md:px-12 lg:px-16 pt-8 md:pt-12 pb-24 flex flex-col">
           <p className="font-main text-[9px] tracking-[4px] text-gold/40 uppercase mb-3">
             EST. 1985 · EL PASO, TEXAS

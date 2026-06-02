@@ -30,7 +30,7 @@ const App: React.FC = () => {
   const isAnimating     = useRef(false);
   const sectionsRef     = useRef<(HTMLElement | null)[]>([]);
 
-  // ── Data hooks ────────────────────────────────────────────────────────────
+  // ── Data hooks ─────────────────────────────────────────────────────────────
   const { products, loading: productsLoading } = useProducts();
   const { lines, itemCount, total, checkoutUrl, loading: cartLoading, addToCart, removeFromCart } = useCart();
 
@@ -150,7 +150,7 @@ const App: React.FC = () => {
 
   // ─────────────────────────────────────────────────────────────────────────
   return (
-    <div className="relative w-full h-screen bg-dark-wood overflow-hidden">
+    <div className="relative w-full h-screen bg-dark-wood overflow-hidden" style={{ height: '100dvh' }}>
       <div className="noise" />
       <Loader onComplete={handleLoaderComplete} />
 
@@ -176,7 +176,7 @@ const App: React.FC = () => {
 
       {/* Side indicators — home only */}
       {view === 'home' && (
-        <div className="fixed right-10 top-1/2 -translate-y-1/2 flex flex-col gap-5 z-[1000]">
+        <div className="hidden sm:flex fixed right-6 md:right-10 top-1/2 -translate-y-1/2 flex-col gap-5 z-[1000]">
           {SECTIONS_DATA.map((_, idx) => (
             <div
               key={idx}
