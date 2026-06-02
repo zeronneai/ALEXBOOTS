@@ -6,7 +6,6 @@ import { useCart } from './src/hooks/useCart';
 import type { ShopifyProduct } from './src/hooks/useProducts';
 
 import Navbar from './components/Navbar';
-import Cursor from './components/Cursor';
 import Loader from './components/Loader';
 import Section from './components/Section';
 import CategoryModal from './components/CategoryModal';
@@ -153,7 +152,6 @@ const App: React.FC = () => {
   return (
     <div className="relative w-full h-screen bg-dark-wood overflow-hidden">
       <div className="noise" />
-      <Cursor />
       <Loader onComplete={handleLoaderComplete} />
 
       {/* Always-on-top navbar */}

@@ -25,7 +25,7 @@ export const SECTIONS_DATA = [
   {
     id: 0,
     title: "LEGACY & LEATHER",
-    subtitle: "Desde 1985. El Paso, Texas. La tradición de lo hecho a mano con el lujo del diseño moderno.",
+    subtitle: "Since 1985. El Paso, Texas. The tradition of handcrafted work meets the luxury of modern design.",
     img: ASSETS.HERO_BG,
     button: "EXPLORE COLLECTION",
     align: "center",
@@ -34,39 +34,39 @@ export const SECTIONS_DATA = [
   {
     id: 1,
     title: "MEN'S\nCOLLECTION",
-    subtitle: "Exóticas, Roper, y Tradicionales. Diseñadas para imponer respeto en cada paso. Pieles de la más alta calidad.",
+    subtitle: "Exotics, Ropers, and Classics. Designed to command respect with every step. Crafted from the finest leathers.",
     img: ASSETS.MEN_BG,
-    button: "VER CATÁLOGO",
+    button: "VIEW CATALOG",
     align: "left"
   },
   {
     id: 2,
     title: "WOMEN'S\nELEGANCE",
-    subtitle: "Estilo que trasciende. Desde el rodeo hasta la ciudad. Botas con detalles finos y siluetas atrevidas.",
+    subtitle: "Style that transcends. From the rodeo to the city. Boots with refined details and bold silhouettes.",
     img: ASSETS.WOMEN_BG,
-    button: "VER CATÁLOGO",
+    button: "VIEW CATALOG",
     align: "right"
   },
   {
     id: 3,
     title: "LITTLE\nRANCHERS",
-    subtitle: "Porque el estilo se hereda. Comodidad y durabilidad para las nuevas generaciones.",
+    subtitle: "Because style is inherited. Comfort and durability for the next generation.",
     img: ASSETS.KIDS_BG,
-    button: "VER CATÁLOGO",
+    button: "VIEW CATALOG",
     align: "left"
   },
   {
     id: 4,
     title: "WORK &\nUNIFORM",
-    subtitle: "Resistencia industrial. Botas tácticas y de trabajo rudo sin sacrificar la identidad western.",
+    subtitle: "Industrial-grade resilience. Tactical and heavy-duty work boots without sacrificing western identity.",
     img: ASSETS.UNIFORM_BG,
-    button: "VER CATÁLOGO",
+    button: "VIEW CATALOG",
     align: "right"
   },
   {
     id: 5,
     title: "CONTACT\nUS",
-    subtitle: "¿Tienes preguntas o pedidos personalizados? Estamos listos para atenderte.",
+    subtitle: "Have questions or custom orders? We're ready to help.",
     img: "https://images.unsplash.com/photo-1447968954315-3f0c44f7313c?q=80&w=2787&auto=format&fit=crop",
     button: "",
     align: "center",
@@ -75,30 +75,30 @@ export const SECTIONS_DATA = [
   {
     id: 6,
     title: "FREQUENT\nQUESTIONS",
-    subtitle: "Todo lo que necesitas saber antes de tu próxima adquisición.",
+    subtitle: "Everything you need to know before your next purchase.",
     img: "https://images.unsplash.com/photo-1612459954497-6a107386d9a1?q=80&w=2787&auto=format&fit=crop",
     button: "",
     align: "left",
     isFaq: true,
     faqItems: [
       {
-        question: "¿Hacen envíos a todo México y USA?",
-        answer: "Sí, enviamos a todo el continente con seguro de envío incluido en cada par para garantizar que lleguen perfectas a tus manos."
+        question: "Do you ship across Mexico and the USA?",
+        answer: "Yes, we ship across the continent with shipping insurance included on every pair to guarantee they arrive in perfect condition."
       },
       {
-        question: "¿Qué pasa si no me quedan?",
-        answer: "Tu satisfacción es primero. Tienes 15 días para cambios de talla sin costo extra. Queremos que te queden como un guante."
+        question: "What if they don't fit?",
+        answer: "Your satisfaction comes first. You have 15 days for size exchanges at no extra cost. We want them to fit like a glove."
       },
       {
-        question: "¿Son pieles exóticas originales?",
-        answer: "Absolutamente. Todos nuestros productos incluyen certificado de autenticidad CITES, garantizando origen legal y sustentable."
+        question: "Are the exotic leathers genuine?",
+        answer: "Absolutely. All of our products include a CITES certificate of authenticity, guaranteeing legal and sustainable sourcing."
       }
     ]
   },
   {
     id: 7,
     title: "VIP\nACCESS",
-    subtitle: "Únete al Club Ranchers.",
+    subtitle: "Join the Ranchers Club.",
     img: "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=2787&auto=format&fit=crop",
     button: "",
     align: "center",

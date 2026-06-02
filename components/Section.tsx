@@ -94,18 +94,18 @@ const Section = forwardRef<HTMLDivElement, SectionProps>(({ data, onOpenCatalog 
       return (
         <div className="custom-content w-full max-w-md flex flex-col gap-6 translate-y-[20px] opacity-0">
           <p className="font-main text-white/70 text-sm text-center mb-2">
-            Recibe acceso anticipado a nuevas colecciones, ofertas exclusivas y lanzamientos limitados antes que nadie.
+            Get early access to new collections, exclusive offers, and limited releases before anyone else.
           </p>
           <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
             <input
               type="email"
-              placeholder="Tu Correo Electrónico"
+              placeholder="Your Email Address"
               className="w-full bg-transparent border-b border-white/30 py-3 text-white font-main text-center text-sm focus:outline-none focus:border-gold transition-colors duration-300 placeholder:text-white/30"
             />
             <button
               className="mx-auto btn-western px-8 py-3 border border-gold text-gold bg-transparent font-display text-sm uppercase tracking-[2px] w-fit transition-all duration-300 hover:bg-gold hover:text-black interactive pointer-events-auto"
             >
-              SUSCRIBIRME
+              SUBSCRIBE
             </button>
           </form>
         </div>
