@@ -8,7 +8,6 @@ import type { ShopifyProduct } from './src/hooks/useProducts';
 import Navbar from './components/Navbar';
 import Loader from './components/Loader';
 import Section from './components/Section';
-import CategoryModal from './components/CategoryModal';
 import ShopView from './components/ShopView';
 import ProductView from './components/ProductView';
 import CartDrawer from './components/CartDrawer';
@@ -23,8 +22,6 @@ const App: React.FC = () => {
 
   // ── Section scroll (home) ─────────────────────────────────────────────────
   const [currentIndex, setCurrentIndex]   = useState(0);
-  const [isModalOpen, setIsModalOpen]     = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const currentIndexRef = useRef(0);
   const isAnimating     = useRef(false);
@@ -51,11 +48,6 @@ const App: React.FC = () => {
       .to(hero.querySelector('.big-title'),     { opacity: 1, y: 0,    duration: 1 }, '-=1')
       .to(hero.querySelector('.subtitle'),      { opacity: 1, y: 0,    duration: 1 }, '-=0.8')
       .to(hero.querySelector('.btn-western'),   { opacity: 1, y: 0,    duration: 1 }, '-=0.6');
-  };
-
-  const handleOpenCatalog = (categoryTitle: string) => {
-    setSelectedCategory(categoryTitle);
-    setIsModalOpen(true);
   };
 
   // ── Section slide animation ───────────────────────────────────────────────
@@ -111,14 +103,14 @@ const App: React.FC = () => {
   // ── Wheel navigation (home only) ──────────────────────────────────────────
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
-      if (isModalOpen || view !== 'home') return;
+      if (view !== 'home') return;
       if (Math.abs(e.deltaY) < 20) return;
       if (e.deltaY > 0) goToSection(currentIndexRef.current + 1);
       else              goToSection(currentIndexRef.current - 1);
     };
     window.addEventListener('wheel', handleWheel);
     return () => window.removeEventListener('wheel', handleWheel);
-  }, [isModalOpen, view]);
+  }, [view]);
 
   // ── Touch swipe navigation (home only) ───────────────────────────────────
   useEffect(() => {
@@ -131,7 +123,7 @@ const App: React.FC = () => {
     };
 
     const onTouchEnd = (e: TouchEvent) => {
-      if (isModalOpen || view !== 'home') return;
+      if (view !== 'home') return;
       const dy = startY - e.changedTouches[0].clientY;
       const dx = Math.abs(startX - e.changedTouches[0].clientX);
       // Only trigger vertical swipe when swipe is more vertical than horizontal
@@ -146,7 +138,7 @@ const App: React.FC = () => {
       window.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('touchend', onTouchEnd);
     };
-  }, [isModalOpen, view]);
+  }, [view]);
 
   // ─────────────────────────────────────────────────────────────────────────
   return (
@@ -161,17 +153,6 @@ const App: React.FC = () => {
         onCartClick={() => setIsCartOpen(true)}
         itemCount={itemCount}
         isCartOpen={isCartOpen}
-      />
-
-      {/* Category modal (section catalog browsing) */}
-      <CategoryModal
-        isOpen={isModalOpen}
-        category={selectedCategory}
-        onClose={() => setIsModalOpen(false)}
-        products={products}
-        onAddToCart={addToCart}
-        onCartOpen={() => setIsCartOpen(true)}
-        cartLoading={cartLoading}
       />
 
       {/* Side indicators — home only */}
@@ -194,7 +175,7 @@ const App: React.FC = () => {
           <Section
             key={section.id}
             data={section}
-            onOpenCatalog={() => handleOpenCatalog(section.title)}
+            onOpenCatalog={openShop}
             ref={(el) => { sectionsRef.current[index] = el; }}
           />
         ))}

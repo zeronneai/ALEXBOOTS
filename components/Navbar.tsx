@@ -8,16 +8,13 @@ interface NavbarProps {
   isCartOpen?: boolean;
 }
 
-// Section links: Home=0, Men=1, Women=2, Kids=3, Uniform=4, Contact=5, FAQ=6, VIP=7
+// Section links: Home=0, Men=1, Women=2, Contact=3, FAQ=4
 const SECTION_LINKS = [
   { label: 'Home',    index: 0 },
   { label: 'Men',     index: 1 },
   { label: 'Women',   index: 2 },
-  { label: 'Kids',    index: 3 },
-  { label: 'Uniform', index: 4 },
-  { label: 'Contact', index: 5 },
-  { label: 'FAQ',     index: 6 },
-  { label: 'VIP',     index: 7 },
+  { label: 'Contact', index: 3 },
+  { label: 'FAQ',     index: 4 },
 ];
 
 const Navbar: React.FC<NavbarProps> = ({ onNavigate, onShopClick, onCartClick, itemCount, isCartOpen }) => (

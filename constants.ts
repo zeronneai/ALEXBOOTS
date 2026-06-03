@@ -49,22 +49,6 @@ export const SECTIONS_DATA = [
   },
   {
     id: 3,
-    title: "LITTLE\nRANCHERS",
-    subtitle: "Because style is inherited. Comfort and durability for the next generation.",
-    img: ASSETS.KIDS_BG,
-    button: "VIEW CATALOG",
-    align: "left"
-  },
-  {
-    id: 4,
-    title: "WORK &\nUNIFORM",
-    subtitle: "Industrial-grade resilience. Tactical and heavy-duty work boots without sacrificing western identity.",
-    img: ASSETS.UNIFORM_BG,
-    button: "VIEW CATALOG",
-    align: "right"
-  },
-  {
-    id: 5,
     title: "CONTACT\nUS",
     subtitle: "Have questions or custom orders? We're ready to help.",
     img: "https://images.unsplash.com/photo-1447968954315-3f0c44f7313c?q=80&w=2787&auto=format&fit=crop",
@@ -73,7 +57,7 @@ export const SECTIONS_DATA = [
     isContact: true
   },
   {
-    id: 6,
+    id: 4,
     title: "FREQUENT\nQUESTIONS",
     subtitle: "Everything you need to know before your next purchase.",
     img: "https://images.unsplash.com/photo-1612459954497-6a107386d9a1?q=80&w=2787&auto=format&fit=crop",
@@ -94,14 +78,5 @@ export const SECTIONS_DATA = [
         answer: "Absolutely. All of our products include a CITES certificate of authenticity, guaranteeing legal and sustainable sourcing."
       }
     ]
-  },
-  {
-    id: 7,
-    title: "VIP\nACCESS",
-    subtitle: "Join the Ranchers Club.",
-    img: "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=2787&auto=format&fit=crop",
-    button: "",
-    align: "center",
-    isNewsletter: true
   }
 ];
