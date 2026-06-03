@@ -75,6 +75,8 @@ const ShopView: React.FC<ShopViewProps> = ({ products, loading, onBack, onSelect
                     <img
                       src={img.url}
                       alt={img.altText ?? p.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover brightness-90 group-hover:brightness-105 group-hover:scale-[1.04] transition-all duration-700"
                     />
                   ) : (

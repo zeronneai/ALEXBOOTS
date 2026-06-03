@@ -133,6 +133,9 @@ const Section = forwardRef<HTMLDivElement, SectionProps>(({ data, onOpenCatalog 
         <img
           src={data.img}
           alt={data.title}
+          loading={data.isHero ? 'eager' : 'lazy'}
+          fetchPriority={data.isHero ? 'high' : 'low'}
+          decoding="async"
           className="section-bg w-full h-full object-cover scale-110 brightness-[0.5]"
         />
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/60 via-transparent to-black/60" />

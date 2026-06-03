@@ -1,4 +1,5 @@
 import React from 'react';
+import { ASSETS } from '../constants';
 
 interface NavbarProps {
   onNavigate: (index: number) => void;
@@ -24,12 +25,14 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, onShopClick, onCartClick, i
   >
     {/* Top row: brand + cart */}
     <div className="flex justify-between items-center px-4 md:px-12 pt-4 md:pt-8 pb-2 md:pb-0">
-      <div
-        className="font-display text-base md:text-2xl text-gold uppercase interactive cursor-pointer"
+      <img
+        src={ASSETS.LOGO_ICON}
+        alt="Ranchers Boot Co."
         onClick={() => onNavigate(0)}
-      >
-        RB CO.
-      </div>
+        loading="eager"
+        decoding="async"
+        className="h-9 md:h-12 w-auto object-contain interactive cursor-pointer drop-shadow-[0_0_12px_rgba(212,175,55,0.3)]"
+      />
 
       {/* Mobile: Shop + Cart */}
       <div className="flex items-center gap-4 md:hidden">

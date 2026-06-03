@@ -5,7 +5,7 @@ interface LoaderProps {
   onComplete: () => void;
 }
 
-const BRAND_IMG = 'https://res.cloudinary.com/dsprn0ew4/image/upload/v1778536281/ChatGPT_Image_May_11_2026_03_50_31_PM_mljyx4.png';
+const BRAND_IMG = 'https://res.cloudinary.com/dsprn0ew4/image/upload/f_auto,q_auto,w_320/v1778536281/ChatGPT_Image_May_11_2026_03_50_31_PM_mljyx4.png';
 
 const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
   const containerRef = useRef<HTMLDivElement>(null);

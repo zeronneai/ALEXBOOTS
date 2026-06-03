@@ -1,18 +1,14 @@
 
+// Cloudinary auto-format + auto-quality + sized delivery (WebP/AVIF, ~80% lighter than raw 4K)
+const CLD = (id: string, w = 1920) =>
+  `https://res.cloudinary.com/dsprn0ew4/image/upload/f_auto,q_auto,w_${w}/${id}`;
+
 export const ASSETS = {
-  LOGO_ICON: "https://res.cloudinary.com/dsprn0ew4/image/upload/v1778536281/ChatGPT_Image_May_11_2026_03_50_31_PM_mljyx4.png",
-  HERO_BG: "https://res.cloudinary.com/dsprn0ew4/image/upload/v1770662473/Generate_an_image_4k_202602091232_rhvqcj.jpg",
-  MEN_BG: "https://res.cloudinary.com/dsprn0ew4/image/upload/v1770663886/Image_202602091253_qbxi2p.jpg",
-  WOMEN_BG: "https://res.cloudinary.com/dsprn0ew4/image/upload/v1770663880/A_cinematic_fashion_4k_202602091301_xongup.jpg",
-  KIDS_BG: "https://res.cloudinary.com/dsprn0ew4/image/upload/v1770663880/Cute_little_kid_4k_202602091255_z7wnqp.jpg",
-  UNIFORM_BG: "https://res.cloudinary.com/dsprn0ew4/image/upload/v1770663892/Heavy_duty_work_4k_202602091255_mmfe4i.jpg",
-  VIDEO_BG: "https://assets.mixkit.co/videos/preview/mixkit-western-landscape-view-4009-large.mp4",
-  LOGO: "https://res.cloudinary.com/dsprn0ew4/image/upload/v1778536281/ChatGPT_Image_May_11_2026_03_50_31_PM_mljyx4.png",
-  CAT_MEN: "https://images.unsplash.com/photo-1533633355057-0b639912c337?q=80&w=1974&auto=format&fit=crop",
-  CAT_WOMEN: "https://images.unsplash.com/photo-1549637642-90187f64f420?q=80&w=2948&auto=format&fit=crop",
-  CAT_KIDS: "https://images.unsplash.com/photo-1603145733190-59811e523c72?q=80&w=2940&auto=format&fit=crop",
-  CAT_UNIFORM: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=2787&auto=format&fit=crop",
-  SHOWCASE_IMG: "https://images.unsplash.com/photo-1605034313761-73ea4a0cfbf3?q=80&w=2787&auto=format&fit=crop"
+  LOGO_ICON: CLD("v1778536281/ChatGPT_Image_May_11_2026_03_50_31_PM_mljyx4.png", 320),
+  HERO_BG: CLD("v1770662473/Generate_an_image_4k_202602091232_rhvqcj.jpg"),
+  MEN_BG: CLD("v1770663886/Image_202602091253_qbxi2p.jpg"),
+  WOMEN_BG: CLD("v1770663880/A_cinematic_fashion_4k_202602091301_xongup.jpg"),
+  LOGO: CLD("v1778536281/ChatGPT_Image_May_11_2026_03_50_31_PM_mljyx4.png", 320),
 };
 
 export const SOCIALS = [
@@ -51,7 +47,7 @@ export const SECTIONS_DATA = [
     id: 3,
     title: "CONTACT\nUS",
     subtitle: "Have questions or custom orders? We're ready to help.",
-    img: "https://images.unsplash.com/photo-1447968954315-3f0c44f7313c?q=80&w=2787&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1447968954315-3f0c44f7313c?q=70&w=1600&auto=format&fit=crop",
     button: "",
     align: "center",
     isContact: true
@@ -60,7 +56,7 @@ export const SECTIONS_DATA = [
     id: 4,
     title: "FREQUENT\nQUESTIONS",
     subtitle: "Everything you need to know before your next purchase.",
-    img: "https://images.unsplash.com/photo-1612459954497-6a107386d9a1?q=80&w=2787&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1612459954497-6a107386d9a1?q=70&w=1600&auto=format&fit=crop",
     button: "",
     align: "left",
     isFaq: true,
