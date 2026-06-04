@@ -9,7 +9,7 @@ interface Props {
 
 const HeroSection: React.FC<Props> = ({ onShopClick, isReady }) => {
   const eyebrowRef = useRef<HTMLParagraphElement>(null);
-  const titleRef   = useRef<HTMLHeadingElement>(null);
+  const logoRef    = useRef<HTMLImageElement>(null);
   const divRef     = useRef<HTMLDivElement>(null);
   const subRef     = useRef<HTMLParagraphElement>(null);
   const btnsRef    = useRef<HTMLDivElement>(null);
@@ -20,7 +20,7 @@ const HeroSection: React.FC<Props> = ({ onShopClick, isReady }) => {
     if (!isReady) return;
     const tl = gsap.timeline();
     tl.fromTo(eyebrowRef.current, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' })
-      .fromTo(titleRef.current,   { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1.4, ease: 'power3.out' }, '-=0.3')
+      .fromTo(logoRef.current,    { opacity: 0, y: 50, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 1.4, ease: 'power3.out' }, '-=0.3')
       .fromTo(divRef.current,     { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.7, ease: 'power2.out', transformOrigin: 'center' }, '-=0.8')
       .fromTo(subRef.current,     { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.9, ease: 'power2.out' }, '-=0.5')
       .fromTo(btnsRef.current,    { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.6')
@@ -45,27 +45,35 @@ const HeroSection: React.FC<Props> = ({ onShopClick, isReady }) => {
           decoding="async"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/25 to-[#1a1512]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/25 to-[#1a1512]" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
+
         <p
           ref={eyebrowRef}
-          className="font-main text-[9px] md:text-[10px] tracking-[8px] text-gold uppercase mb-7"
+          className="font-main text-[9px] md:text-[10px] tracking-[8px] text-gold uppercase mb-8 md:mb-10"
           style={{ opacity: 0 }}
         >
           Est. 1985 &nbsp;·&nbsp; El Paso, Texas
         </p>
 
-        <h1
-          ref={titleRef}
-          className="font-display uppercase leading-[0.88] tracking-[-0.01em] text-cream mb-7"
-          style={{ opacity: 0, fontSize: 'clamp(3.8rem, 13vw, 9rem)' }}
-        >
-          Ranchers<br />Boot Co.
-        </h1>
+        {/* Large logo — replaces text headline */}
+        <img
+          ref={logoRef}
+          src={ASSETS.LOGO_HERO}
+          alt="Ranchers Boot Co."
+          loading="eager"
+          decoding="async"
+          className="w-auto object-contain drop-shadow-[0_4px_32px_rgba(212,175,55,0.25)] mb-7 md:mb-9"
+          style={{
+            opacity: 0,
+            maxHeight: 'clamp(7rem, 22vw, 18rem)',
+            maxWidth: '85vw',
+          }}
+        />
 
         <div
           ref={divRef}
