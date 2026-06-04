@@ -45,29 +45,30 @@ const HeroSection: React.FC<Props> = ({ onShopClick, isReady }) => {
           decoding="async"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/25 to-[#1a1512]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-[#1a1512]" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
 
+        {/* Eyebrow */}
         <p
           ref={eyebrowRef}
-          className="font-main text-[9px] md:text-[10px] tracking-[8px] text-gold uppercase mb-8 md:mb-10"
+          className="font-main font-semibold text-[11px] md:text-[13px] tracking-[7px] text-gold uppercase mb-8 md:mb-10"
           style={{ opacity: 0 }}
         >
           Est. 1985 &nbsp;·&nbsp; El Paso, Texas
         </p>
 
-        {/* Large logo — replaces text headline */}
+        {/* Large logo */}
         <img
           ref={logoRef}
           src={ASSETS.LOGO_HERO}
           alt="Ranchers Boot Co."
           loading="eager"
           decoding="async"
-          className="w-auto object-contain drop-shadow-[0_4px_32px_rgba(212,175,55,0.25)] mb-7 md:mb-9"
+          className="w-auto object-contain drop-shadow-[0_4px_40px_rgba(212,175,55,0.35)] mb-8 md:mb-10"
           style={{
             opacity: 0,
             maxHeight: 'clamp(7rem, 22vw, 18rem)',
@@ -75,20 +76,23 @@ const HeroSection: React.FC<Props> = ({ onShopClick, isReady }) => {
           }}
         />
 
+        {/* Gold divider */}
         <div
           ref={divRef}
-          className="w-20 h-px bg-gold/60 mb-7 md:mb-9"
+          className="w-24 h-px bg-gold mb-8 md:mb-10"
           style={{ opacity: 0 }}
         />
 
+        {/* Subtitle */}
         <p
           ref={subRef}
-          className="font-main text-[11px] md:text-sm text-cream/60 mb-12 md:mb-14 max-w-xs mx-auto leading-relaxed tracking-[3px] uppercase"
+          className="font-main font-semibold text-sm md:text-base text-cream/90 mb-12 md:mb-16 max-w-sm mx-auto leading-relaxed tracking-[4px] uppercase"
           style={{ opacity: 0 }}
         >
           Handcrafted leather boots.<br />Tradition since 1985.
         </p>
 
+        {/* Buttons */}
         <div
           ref={btnsRef}
           className="flex flex-col sm:flex-row items-center gap-4"
@@ -96,13 +100,13 @@ const HeroSection: React.FC<Props> = ({ onShopClick, isReady }) => {
         >
           <button
             onClick={onShopClick}
-            className="font-display text-[10px] tracking-[6px] text-card-bg bg-gold hover:bg-cream uppercase transition-colors duration-300 interactive px-14 py-4 md:py-5"
+            className="font-display text-[11px] tracking-[6px] text-card-bg bg-gold hover:bg-cream uppercase transition-colors duration-300 interactive px-16 py-5"
           >
             Shop the Collection
           </button>
           <button
             onClick={() => document.getElementById('heritage')?.scrollIntoView({ behavior: 'smooth' })}
-            className="font-display text-[10px] tracking-[5px] text-cream/55 hover:text-gold uppercase transition-all duration-300 interactive border border-white/20 hover:border-gold/50 px-10 py-4 md:py-5"
+            className="font-display text-[11px] tracking-[5px] text-cream hover:text-gold uppercase transition-all duration-300 interactive border border-white/35 hover:border-gold/60 px-12 py-5"
           >
             Our Story
           </button>
@@ -115,9 +119,9 @@ const HeroSection: React.FC<Props> = ({ onShopClick, isReady }) => {
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 pointer-events-none select-none"
         style={{ opacity: 0 }}
       >
-        <span className="font-main text-[8px] tracking-[5px] text-cream/25 uppercase">Scroll</span>
-        <div className="w-px h-14 bg-cream/15 relative overflow-hidden">
-          <div ref={lineRef} className="absolute inset-0 bg-gold/70" style={{ transformOrigin: 'top center', scaleY: 0 }} />
+        <span className="font-main font-semibold text-[9px] tracking-[5px] text-cream/40 uppercase">Scroll</span>
+        <div className="w-px h-14 bg-cream/20 relative overflow-hidden">
+          <div ref={lineRef} className="absolute inset-0 bg-gold" style={{ transformOrigin: 'top center', scaleY: 0 }} />
         </div>
       </div>
     </section>

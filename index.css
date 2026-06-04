@@ -31,6 +31,23 @@ a, button, .interactive, [role="button"] {
   cursor: pointer;
 }
 
+/* ── Typography defaults ───────────────────────────── */
+/* Cinzel defaults to 400 — force 700 so it reads bold everywhere */
+.font-display {
+  font-weight: 700;
+}
+
+/* Cinzel 900 for extra-large hero/section headlines */
+.font-display-black {
+  font-family: 'Cinzel', serif;
+  font-weight: 900;
+}
+
+/* Montserrat: bump body text to medium for readability */
+.font-main {
+  font-weight: 500;
+}
+
 /* ── Noise overlay ─────────────────────────────────── */
 .noise {
   position: fixed;

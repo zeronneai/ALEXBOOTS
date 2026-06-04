@@ -36,17 +36,17 @@ const HeritageSection: React.FC = () => {
 
         {/* Text */}
         <div ref={textRef} className="reveal reveal-delay-2 w-full md:w-[48%] flex flex-col justify-center">
-          <p className="font-main text-[9px] tracking-[7px] text-gold/60 uppercase mb-6">
+          <p className="font-main font-semibold text-[11px] tracking-[6px] text-gold uppercase mb-6">
             Our Heritage
           </p>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-cream uppercase leading-[0.95] tracking-[0.03em] mb-8">
             The Art of<br />the Border
           </h2>
           <div className="w-12 h-px bg-gold/50 mb-8" />
-          <p className="font-main text-sm md:text-[15px] text-cream/55 leading-relaxed mb-5 tracking-wide">
+          <p className="font-main text-sm md:text-[15px] text-cream/80 leading-relaxed mb-5 tracking-wide">
             Handcrafted in the heart of the border. Every pair tells a story of tradition, leather, and legacy — forged across decades in El Paso, Texas and the borderlands of Juárez.
           </p>
-          <p className="font-main text-sm md:text-[15px] text-cream/55 leading-relaxed mb-12 tracking-wide">
+          <p className="font-main text-sm md:text-[15px] text-cream/80 leading-relaxed mb-12 tracking-wide">
             From the first cut of exotic skin to the final hand-stitched welt, every boot carries the mark of a craftsman who has dedicated their life to this art. No two pairs are identical. That is the point.
           </p>
           <button

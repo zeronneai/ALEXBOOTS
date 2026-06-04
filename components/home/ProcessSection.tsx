@@ -33,7 +33,7 @@ const ProcessSection: React.FC = () => {
 
       {/* Header */}
       <div ref={headerRef} className="reveal text-center mb-20 md:mb-28">
-        <p className="font-main text-[9px] tracking-[7px] text-gold/60 uppercase mb-5">From Hide to Boot</p>
+        <p className="font-main font-semibold text-[11px] tracking-[6px] text-gold uppercase mb-5">From Hide to Boot</p>
         <h2 className="font-display text-4xl md:text-6xl lg:text-7xl text-cream uppercase tracking-[0.04em] leading-none mb-6">
           The Process
         </h2>
@@ -63,7 +63,7 @@ const ProcessSection: React.FC = () => {
             </h3>
 
             {/* Description */}
-            <p className="font-main text-[11px] md:text-xs text-cream/45 leading-relaxed tracking-wide">
+            <p className="font-main text-[11px] md:text-xs text-cream/75 leading-relaxed tracking-wide">
               {step.desc}
             </p>
           </div>

@@ -35,7 +35,7 @@ const GallerySection: React.FC = () => {
       {/* Header */}
       <div ref={headerRef} className="reveal flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 md:mb-16">
         <div>
-          <p className="font-main text-[9px] tracking-[7px] text-gold/60 uppercase mb-4">Behind the Boot</p>
+          <p className="font-main font-semibold text-[11px] tracking-[6px] text-gold uppercase mb-4">Behind the Boot</p>
           <h2 className="font-display text-4xl md:text-6xl text-cream uppercase tracking-[0.04em] leading-none">
             Gallery
           </h2>

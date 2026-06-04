@@ -174,7 +174,7 @@ const BestSellersSection: React.FC<Props> = ({
       <div ref={headerRef} className="reveal mb-14 md:mb-20">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-10">
           <div>
-            <p className="font-main text-[9px] tracking-[7px] text-gold/60 uppercase mb-4">
+            <p className="font-main font-semibold text-[11px] tracking-[6px] text-gold uppercase mb-4">
               Handcrafted Collection
             </p>
             <h2 className="font-display text-4xl md:text-6xl lg:text-7xl text-cream uppercase tracking-[0.03em] leading-none">

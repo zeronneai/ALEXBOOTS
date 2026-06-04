@@ -95,7 +95,7 @@ const Navbar: React.FC<NavbarProps> = ({
               <button
                 key={label}
                 onClick={() => scrollTo(id)}
-                className="relative group font-display text-[9px] tracking-[4px] text-cream/60 hover:text-cream uppercase transition-colors duration-300 interactive"
+                className="relative group font-display text-[9px] tracking-[4px] text-cream/85 hover:text-cream uppercase transition-colors duration-300 interactive"
               >
                 {label}
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold transition-all duration-400 group-hover:w-full" />

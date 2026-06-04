@@ -25,7 +25,7 @@ const VideoSection: React.FC = () => {
         className="reveal relative z-10 flex flex-col items-center justify-center text-center px-6 py-36 md:py-52"
         style={{ minHeight: '75vh' }}
       >
-        <p className="font-main text-[9px] tracking-[7px] text-gold/60 uppercase mb-8">
+        <p className="font-main font-semibold text-[11px] tracking-[6px] text-gold uppercase mb-8">
           The Process
         </p>
 
@@ -38,7 +38,7 @@ const VideoSection: React.FC = () => {
 
         <div className="w-16 h-px bg-gold/50 mb-8" />
 
-        <p className="font-main text-[11px] md:text-sm text-cream/50 tracking-[4px] uppercase max-w-xs leading-relaxed">
+        <p className="font-main font-semibold text-[12px] md:text-sm text-cream/80 tracking-[4px] uppercase max-w-xs leading-relaxed">
           El Paso, Texas &nbsp;·&nbsp; Est. 1985<br />Every stitch. Every cut. Every pair.
         </p>
 

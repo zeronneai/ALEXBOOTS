@@ -22,7 +22,7 @@ const CategoriesSection: React.FC<Props> = ({ onCategoryClick }) => {
 
       {/* Header */}
       <div ref={headerRef} className="reveal text-center mb-16 md:mb-24">
-        <p className="font-main text-[9px] tracking-[7px] text-gold/60 uppercase mb-5">Shop by Category</p>
+        <p className="font-main font-semibold text-[11px] tracking-[6px] text-gold uppercase mb-5">Shop by Category</p>
         <h2 className="font-display text-4xl md:text-6xl lg:text-7xl text-cream uppercase tracking-[0.05em] leading-none">
           Find Your Pair
         </h2>

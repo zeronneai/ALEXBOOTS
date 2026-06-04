@@ -28,7 +28,7 @@ const StoreSection: React.FC = () => {
 
       {/* Header */}
       <div className="text-center mb-16 md:mb-24">
-        <p className="font-main text-[9px] tracking-[7px] text-gold/60 uppercase mb-5">Come Find Us</p>
+        <p className="font-main font-semibold text-[11px] tracking-[6px] text-gold uppercase mb-5">Come Find Us</p>
         <h2 className="font-display text-4xl md:text-6xl lg:text-7xl text-cream uppercase tracking-[0.04em] leading-none">
           Visit the Store
         </h2>
