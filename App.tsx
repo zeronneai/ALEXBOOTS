@@ -153,6 +153,7 @@ const App: React.FC = () => {
         onCartClick={() => setIsCartOpen(true)}
         itemCount={itemCount}
         isCartOpen={isCartOpen}
+        isOverlay={view !== 'home'}
       />
 
       {/* Side indicators — home only */}

@@ -23,6 +23,7 @@ const ProductView: React.FC<ProductViewProps> = ({
   const [selected, setSelected]       = useState<ShopifyVariant | null>(
     variants.find(v => v.availableForSale) ?? variants[0] ?? null
   );
+  const [qty,    setQty]    = useState(1);
   const [adding, setAdding] = useState(false);
   const [added,  setAdded]  = useState(false);
 
@@ -36,7 +37,7 @@ const ProductView: React.FC<ProductViewProps> = ({
     if (!selected || adding) return;
     setAdding(true);
     try {
-      await onAddToCart(selected.id);
+      for (let i = 0; i < qty; i++) await onAddToCart(selected.id);
       setAdded(true);
       setTimeout(() => setAdded(false), 2500);
       onCartOpen();
@@ -134,6 +135,32 @@ const ProductView: React.FC<ProductViewProps> = ({
               </div>
             </div>
           )}
+
+          {/* Quantity selector */}
+          <div className="mb-5">
+            <p className="font-main text-[10px] tracking-[3px] text-white/35 uppercase mb-3">
+              Quantity
+            </p>
+            <div className="flex items-center gap-0 w-fit border border-white/20">
+              <button
+                onClick={() => setQty(q => Math.max(1, q - 1))}
+                disabled={qty <= 1}
+                className="w-10 h-10 flex items-center justify-center text-white/60 hover:text-gold hover:bg-white/5 transition-colors duration-200 disabled:opacity-20 disabled:cursor-not-allowed interactive font-main text-lg leading-none"
+              >
+                −
+              </button>
+              <span className="w-10 h-10 flex items-center justify-center font-main text-sm text-white border-x border-white/20 tabular-nums">
+                {qty}
+              </span>
+              <button
+                onClick={() => setQty(q => Math.min(10, q + 1))}
+                disabled={qty >= 10}
+                className="w-10 h-10 flex items-center justify-center text-white/60 hover:text-gold hover:bg-white/5 transition-colors duration-200 disabled:opacity-20 disabled:cursor-not-allowed interactive font-main text-lg leading-none"
+              >
+                +
+              </button>
+            </div>
+          </div>
 
           <button
             onClick={handleAdd}

@@ -7,6 +7,7 @@ interface NavbarProps {
   onCartClick: () => void;
   itemCount: number;
   isCartOpen?: boolean;
+  isOverlay?: boolean;
 }
 
 // Section links: Home=0, Men=1, Women=2, Contact=3, FAQ=4
@@ -18,10 +19,12 @@ const SECTION_LINKS = [
   { label: 'FAQ',     index: 4 },
 ];
 
-const Navbar: React.FC<NavbarProps> = ({ onNavigate, onShopClick, onCartClick, itemCount, isCartOpen }) => (
+const Navbar: React.FC<NavbarProps> = ({ onNavigate, onShopClick, onCartClick, itemCount, isCartOpen, isOverlay }) => (
   <nav
     style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
-    className={`fixed top-0 w-full z-[2100] transition-all duration-300 ${isCartOpen ? 'opacity-0 pointer-events-none' : 'mix-blend-difference'}`}
+    className={`fixed top-0 w-full z-[2100] transition-all duration-300 ${
+      isCartOpen || isOverlay ? 'opacity-0 pointer-events-none' : 'mix-blend-difference'
+    }`}
   >
     {/* Top row: brand + cart */}
     <div className="flex justify-between items-center px-4 md:px-12 pt-4 md:pt-8 pb-2 md:pb-0">
