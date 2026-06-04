@@ -4,8 +4,11 @@ import type { GenderFilter } from '../src/hooks/useGenderFilter';
 import HeroSection        from './home/HeroSection';
 import CategoriesSection  from './home/CategoriesSection';
 import HeritageSection    from './home/HeritageSection';
+import ProcessSection     from './home/ProcessSection';
 import VideoSection       from './home/VideoSection';
 import BestSellersSection from './home/BestSellersSection';
+import GallerySection     from './home/GallerySection';
+import StoreSection       from './home/StoreSection';
 import FooterSection      from './home/FooterSection';
 
 interface Props {
@@ -34,6 +37,7 @@ const HomePage: React.FC<Props> = ({
       <HeroSection        onShopClick={onShopClick} isReady={isReady} />
       <CategoriesSection  onCategoryClick={handleCategoryClick} />
       <HeritageSection />
+      <ProcessSection />
       <VideoSection />
       <BestSellersSection
         products={products}
@@ -43,6 +47,8 @@ const HomePage: React.FC<Props> = ({
         onFilterChange={setActiveFilter}
         onShopAll={onShopAll ?? onShopClick}
       />
+      <GallerySection />
+      <StoreSection />
       <FooterSection />
     </div>
   );

@@ -19,9 +19,11 @@ const CartIcon = ({ size = 18 }: { size?: number }) => (
 );
 
 const NAV_LINKS = [
-  { label: 'Collection', id: 'collection' },
-  { label: 'Heritage',   id: 'heritage'   },
-  { label: 'Contact',    id: 'footer'     },
+  { label: 'Collection', id: 'collection'   },
+  { label: 'Heritage',   id: 'heritage'     },
+  { label: 'Gallery',    id: 'gallery'      },
+  { label: 'Visit Us',   id: 'store'        },
+  { label: 'Contact',    id: 'footer'       },
 ];
 
 const Navbar: React.FC<NavbarProps> = ({
