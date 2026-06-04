@@ -5,6 +5,7 @@ export interface ShopifyVariant {
   id: string;
   title: string;
   availableForSale: boolean;
+  quantityAvailable: number | null;
   price: {
     amount: string;
     currencyCode: string;
@@ -66,6 +67,7 @@ const PRODUCTS_QUERY = `
                 id
                 title
                 availableForSale
+                quantityAvailable
                 price {
                   amount
                   currencyCode

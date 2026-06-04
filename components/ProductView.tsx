@@ -27,6 +27,9 @@ const ProductView: React.FC<ProductViewProps> = ({
   const [adding, setAdding] = useState(false);
   const [added,  setAdded]  = useState(false);
 
+  const stock = selected?.quantityAvailable ?? null;
+  const maxQty = stock !== null ? Math.max(0, stock) : 10;
+
   const displayPrice = selected
     ? fmt(selected.price.amount, selected.price.currencyCode)
     : fmt(product.priceRange.minVariantPrice.amount, product.priceRange.minVariantPrice.currencyCode);
@@ -119,7 +122,7 @@ const ProductView: React.FC<ProductViewProps> = ({
                 {variants.map(v => (
                   <button
                     key={v.id}
-                    onClick={() => setSelected(v)}
+                    onClick={() => { setSelected(v); setQty(1); }}
                     disabled={!v.availableForSale}
                     className={`
                       px-3 md:px-4 py-2 text-[10px] md:text-[11px] font-main uppercase tracking-widest border transition-all duration-200 interactive
@@ -138,13 +141,22 @@ const ProductView: React.FC<ProductViewProps> = ({
 
           {/* Quantity selector */}
           <div className="mb-5">
-            <p className="font-main text-[10px] tracking-[3px] text-white/35 uppercase mb-3">
-              Quantity
-            </p>
+            <div className="flex items-baseline gap-3 mb-3">
+              <p className="font-main text-[10px] tracking-[3px] text-white/35 uppercase">
+                Quantity
+              </p>
+              {stock !== null && (
+                <p className={`font-main text-[9px] tracking-[2px] uppercase ${
+                  stock === 0 ? 'text-red-400/70' : stock <= 3 ? 'text-gold/60' : 'text-white/20'
+                }`}>
+                  {stock === 0 ? 'Out of stock' : stock <= 3 ? `Only ${stock} left` : `${stock} available`}
+                </p>
+              )}
+            </div>
             <div className="flex items-center gap-0 w-fit border border-white/20">
               <button
                 onClick={() => setQty(q => Math.max(1, q - 1))}
-                disabled={qty <= 1}
+                disabled={qty <= 1 || maxQty === 0}
                 className="w-10 h-10 flex items-center justify-center text-white/60 hover:text-gold hover:bg-white/5 transition-colors duration-200 disabled:opacity-20 disabled:cursor-not-allowed interactive font-main text-lg leading-none"
               >
                 −
@@ -153,8 +165,8 @@ const ProductView: React.FC<ProductViewProps> = ({
                 {qty}
               </span>
               <button
-                onClick={() => setQty(q => Math.min(10, q + 1))}
-                disabled={qty >= 10}
+                onClick={() => setQty(q => Math.min(maxQty, q + 1))}
+                disabled={qty >= maxQty}
                 className="w-10 h-10 flex items-center justify-center text-white/60 hover:text-gold hover:bg-white/5 transition-colors duration-200 disabled:opacity-20 disabled:cursor-not-allowed interactive font-main text-lg leading-none"
               >
                 +
@@ -164,10 +176,10 @@ const ProductView: React.FC<ProductViewProps> = ({
 
           <button
             onClick={handleAdd}
-            disabled={adding || cartLoading || !selected}
+            disabled={adding || cartLoading || !selected || maxQty === 0}
             className="w-full py-4 bg-gold text-black font-display text-sm uppercase tracking-[3px] hover:bg-white transition-colors duration-300 disabled:opacity-40 disabled:cursor-not-allowed interactive mb-3"
           >
-            {adding ? 'ADDING...' : added ? 'ADDED TO CART ✓' : 'ADD TO CART'}
+            {adding ? 'ADDING...' : added ? 'ADDED TO CART ✓' : maxQty === 0 ? 'OUT OF STOCK' : 'ADD TO CART'}
           </button>
           <p className="font-main text-[9px] text-white/20 tracking-[2px] text-center uppercase mb-8">
             Secure checkout via Shopify
