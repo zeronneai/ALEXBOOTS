@@ -53,6 +53,7 @@ const App: React.FC = () => {
         productsLoading={productsLoading}
         onSelectProduct={openProduct}
         onShopClick={openShop}
+        onShopAll={openShop}
         isReady={isReady}
       />
 

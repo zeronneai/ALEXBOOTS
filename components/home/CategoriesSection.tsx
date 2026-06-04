@@ -7,30 +7,29 @@ interface Props {
   onCategoryClick: (filter: GenderFilter) => void;
 }
 
-const CATS: { label: string; sub: string; img: string; filter: GenderFilter }[] = [
-  { label: "Men's",   sub: 'Exotics, Ropers & Classics',        img: ASSETS.MEN_BG,   filter: 'men'   },
-  { label: "Women's", sub: 'Elegant Silhouettes & Bold Detail',  img: ASSETS.WOMEN_BG, filter: 'women' },
+const CATS: { num: string; label: string; sub: string; img: string; filter: GenderFilter }[] = [
+  { num: '01', label: "Men's",   sub: 'Exotics, Ropers & Classics',       img: ASSETS.MEN_BG,   filter: 'men'   },
+  { num: '02', label: "Women's", sub: 'Elegant Silhouettes & Bold Detail', img: ASSETS.WOMEN_BG, filter: 'women' },
 ];
 
 const CategoriesSection: React.FC<Props> = ({ onCategoryClick }) => {
   const [hovered, setHovered] = useState<number | null>(null);
   const headerRef = useReveal() as React.RefObject<HTMLDivElement>;
-  const cardsRef  = useReveal(0.08) as React.RefObject<HTMLDivElement>;
+  const cardsRef  = useReveal(0.06) as React.RefObject<HTMLDivElement>;
 
   return (
-    <section id="categories" className="bg-dark-wood py-24 md:py-36 px-5 md:px-12 lg:px-20">
+    <section id="categories" className="bg-dark-2 py-24 md:py-36 px-5 md:px-12 lg:px-20">
 
       {/* Header */}
-      <div ref={headerRef} className="reveal text-center mb-14 md:mb-20">
-        <p className="font-main text-[9px] tracking-[7px] text-gold/45 uppercase mb-5">Shop</p>
-        <h2 className="font-display text-3xl md:text-5xl text-cream uppercase tracking-[0.12em] mb-5">
-          Shop by Category
+      <div ref={headerRef} className="reveal text-center mb-16 md:mb-24">
+        <p className="font-main text-[9px] tracking-[7px] text-gold/60 uppercase mb-5">Shop by Category</p>
+        <h2 className="font-display text-4xl md:text-6xl lg:text-7xl text-cream uppercase tracking-[0.05em] leading-none">
+          Find Your Pair
         </h2>
-        <div className="w-14 h-px bg-gold/40 mx-auto" />
       </div>
 
-      {/* 2-card grid — centered, generous sizing */}
-      <div ref={cardsRef} className="reveal reveal-delay-2 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto">
+      {/* Cards */}
+      <div ref={cardsRef} className="reveal reveal-delay-2 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 max-w-5xl mx-auto">
         {CATS.map((cat, i) => (
           <button
             key={cat.label}
@@ -38,31 +37,44 @@ const CategoriesSection: React.FC<Props> = ({ onCategoryClick }) => {
             onMouseEnter={() => setHovered(i)}
             onMouseLeave={() => setHovered(null)}
             className="interactive relative overflow-hidden w-full group"
-            style={{ aspectRatio: '4/5' }}
+            style={{ aspectRatio: '3/4' }}
           >
+            {/* Image */}
             <img
               src={cat.img}
               alt={cat.label}
               loading="lazy"
               decoding="async"
-              className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out ${hovered === i ? 'scale-105 brightness-[0.45]' : 'scale-100 brightness-[0.6]'}`}
+              className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out ${
+                hovered === i ? 'scale-[1.06] brightness-[0.35]' : 'scale-100 brightness-[0.55]'
+              }`}
             />
-            {/* Bottom gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-dark-wood/90 via-transparent to-transparent" />
 
-            {/* Card text */}
-            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 text-left">
-              <p className="font-main text-[8px] tracking-[5px] text-gold/60 uppercase mb-2">
-                {cat.sub}
-              </p>
-              <h3 className="font-display text-2xl md:text-3xl text-cream uppercase tracking-[0.1em]">
-                {cat.label}
-              </h3>
+            {/* Bottom gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+            {/* Number badge */}
+            <div className="absolute top-6 left-6 md:top-8 md:left-8">
+              <span className="font-display text-[10px] tracking-[4px] text-gold/50 uppercase">{cat.num}</span>
             </div>
 
-            {/* Hover CTA */}
+            {/* Card text — bottom */}
+            <div className="absolute bottom-0 left-0 right-0 p-7 md:p-10 text-left">
+              <p className="font-main text-[8px] tracking-[5px] text-gold/70 uppercase mb-3">
+                {cat.sub}
+              </p>
+              <h3 className="font-display text-3xl md:text-4xl text-cream uppercase tracking-[0.05em] leading-none mb-5">
+                {cat.label}
+              </h3>
+              <div className={`flex items-center gap-3 transition-all duration-300 ${hovered === i ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2'}`}>
+                <span className="font-display text-[9px] tracking-[5px] text-gold uppercase">Shop {cat.label}</span>
+                <span className="w-8 h-px bg-gold inline-block" />
+              </div>
+            </div>
+
+            {/* Center CTA on hover */}
             <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${hovered === i ? 'opacity-100' : 'opacity-0'}`}>
-              <span className="font-display text-[9px] tracking-[5px] text-cream uppercase border border-cream/50 px-8 py-3">
+              <span className="font-display text-[10px] tracking-[6px] text-cream uppercase border border-cream/50 px-10 py-4">
                 Explore →
               </span>
             </div>

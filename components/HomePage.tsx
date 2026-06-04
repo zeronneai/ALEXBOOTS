@@ -14,10 +14,11 @@ interface Props {
   onSelectProduct: (p: ShopifyProduct) => void;
   onShopClick: () => void;
   isReady: boolean;
+  onShopAll?: () => void;
 }
 
 const HomePage: React.FC<Props> = ({
-  products, productsLoading, onSelectProduct, onShopClick, isReady,
+  products, productsLoading, onSelectProduct, onShopClick, isReady, onShopAll,
 }) => {
   const [activeFilter, setActiveFilter] = useState<GenderFilter>('all');
 
@@ -40,6 +41,7 @@ const HomePage: React.FC<Props> = ({
         onSelectProduct={onSelectProduct}
         activeFilter={activeFilter}
         onFilterChange={setActiveFilter}
+        onShopAll={onShopAll ?? onShopClick}
       />
       <FooterSection />
     </div>
