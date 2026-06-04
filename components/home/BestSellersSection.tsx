@@ -30,10 +30,127 @@ const Skeleton = () => (
   </div>
 );
 
+function isProductSoldOut(p: ShopifyProduct) {
+  return p.variants.edges.length > 0 && p.variants.edges.every(e => !e.node.availableForSale);
+}
+
+const ProductCard: React.FC<{
+  p: ShopifyProduct;
+  onSelect: () => void;
+}> = ({ p, onSelect }) => {
+  const [hov, setHov] = useState(false);
+  const img1 = p.images.edges[0]?.node;
+  const img2 = p.images.edges[1]?.node;
+  const extraImages = p.images.edges.length > 2 ? p.images.edges.length - 1 : 0;
+  const { amount, currencyCode } = p.priceRange.minVariantPrice;
+  const soldOut = isProductSoldOut(p);
+
+  return (
+    <button
+      onClick={onSelect}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      className="text-left w-full group interactive"
+    >
+      {/* Image container */}
+      <div className="relative w-full aspect-[3/4] overflow-hidden bg-card-bg mb-3 md:mb-4">
+
+        {/* Primary image — zooms out as secondary comes in */}
+        {img1 && (
+          <img
+            src={img1.url}
+            alt={img1.altText ?? p.title}
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              opacity: hov && img2 ? 0 : 1,
+              transform: hov ? (img2 ? 'scale(1.06)' : 'scale(1.07)') : 'scale(1)',
+              transition: 'opacity 0.65s ease, transform 0.85s ease',
+            }}
+          />
+        )}
+
+        {/* Secondary image — zooms in from slightly larger */}
+        {img2 && (
+          <img
+            src={img2.url}
+            alt={img2.altText ?? p.title}
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              opacity: hov ? 1 : 0,
+              transform: hov ? 'scale(1)' : 'scale(1.06)',
+              transition: 'opacity 0.65s ease, transform 0.85s ease',
+            }}
+          />
+        )}
+
+        {/* No image fallback */}
+        {!img1 && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="font-display text-white/10 text-[10px] uppercase tracking-widest">No Image</span>
+          </div>
+        )}
+
+        {/* Sold Out badge */}
+        {soldOut && (
+          <div className="absolute top-3 left-3 z-10 bg-dark-wood/90 backdrop-blur-sm px-3 py-1.5 border border-white/10">
+            <span className="font-display text-[8px] tracking-[3px] text-cream/55 uppercase">Sold Out</span>
+          </div>
+        )}
+
+        {/* Image count badge (when 3+ images) */}
+        {extraImages > 0 && (
+          <div className="absolute top-3 right-3 z-10 bg-black/50 backdrop-blur-sm w-7 h-7 flex items-center justify-center">
+            <span className="font-main text-[9px] text-cream/70">+{extraImages}</span>
+          </div>
+        )}
+
+        {/* Quick Shop bar — slides up from bottom */}
+        <div
+          className="absolute bottom-0 left-0 right-0 z-10 bg-gold flex items-center justify-center py-3"
+          style={{
+            transform: hov ? 'translateY(0)' : 'translateY(100%)',
+            transition: 'transform 0.35s cubic-bezier(0.33, 1, 0.68, 1)',
+          }}
+        >
+          <span className="font-display text-[9px] tracking-[5px] text-card-bg uppercase">
+            Quick Shop
+          </span>
+        </div>
+
+        {/* Border glow on hover */}
+        <div
+          className="absolute inset-0 pointer-events-none border"
+          style={{
+            borderColor: hov ? 'rgba(212,175,55,0.45)' : 'rgba(255,255,255,0.06)',
+            transition: 'border-color 0.4s ease',
+          }}
+        />
+      </div>
+
+      {/* Product info */}
+      <p
+        className="font-display text-[10px] md:text-[11px] uppercase tracking-[0.08em] leading-snug mb-1.5 line-clamp-2 transition-colors duration-300"
+        style={{ color: hov ? '#f5f0e6' : 'rgba(245,240,230,0.7)' }}
+      >
+        {p.title}
+      </p>
+      <p
+        className="font-main text-[11px] tracking-[2px] transition-colors duration-300"
+        style={{ color: hov ? '#d4af37' : 'rgba(212,175,55,0.75)' }}
+      >
+        {fmt(amount, currencyCode)}
+      </p>
+    </button>
+  );
+};
+
 const BestSellersSection: React.FC<Props> = ({
   products, loading, onSelectProduct, activeFilter, onFilterChange, onShopAll,
 }) => {
-  const [hovered, setHovered] = useState<string | null>(null);
   const [localFilter, setLocalFilter] = useState<GenderFilter>('all');
 
   const currentFilter = activeFilter ?? localFilter;
@@ -117,65 +234,11 @@ const BestSellersSection: React.FC<Props> = ({
       ) : (
         <>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
-            {visible.map(p => {
-              const img1 = p.images.edges[0]?.node;
-              const img2 = p.images.edges[1]?.node;
-              const { amount, currencyCode } = p.priceRange.minVariantPrice;
-              const isHov = hovered === p.id;
-
-              return (
-                <button
-                  key={p.id}
-                  onClick={() => onSelectProduct(p)}
-                  onMouseEnter={() => setHovered(p.id)}
-                  onMouseLeave={() => setHovered(null)}
-                  className="text-left interactive group w-full"
-                >
-                  <div className="product-card-border relative w-full aspect-[3/4] overflow-hidden bg-card-bg mb-4 border border-white/[0.06]">
-                    {img1 ? (
-                      <>
-                        <img
-                          src={img1.url}
-                          alt={img1.altText ?? p.title}
-                          loading="lazy"
-                          decoding="async"
-                          className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${
-                            isHov ? (img2 ? 'opacity-0' : 'scale-[1.04] brightness-75') : 'opacity-100 scale-100'
-                          }`}
-                        />
-                        {img2 && (
-                          <img
-                            src={img2.url}
-                            alt={img2.altText ?? p.title}
-                            loading="lazy"
-                            decoding="async"
-                            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isHov ? 'opacity-100' : 'opacity-0'}`}
-                          />
-                        )}
-                      </>
-                    ) : (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="font-display text-white/10 text-[10px] uppercase tracking-widest">No Image</span>
-                      </div>
-                    )}
-                    <div className={`absolute inset-0 bg-black/50 flex items-center justify-center transition-opacity duration-300 ${isHov ? 'opacity-100' : 'opacity-0'}`}>
-                      <span className="font-display text-[9px] tracking-[5px] text-cream uppercase border border-cream/60 px-6 py-3">
-                        View Product
-                      </span>
-                    </div>
-                  </div>
-                  <p className="font-display text-[10px] md:text-[11px] text-cream/70 group-hover:text-cream uppercase tracking-[0.08em] leading-snug mb-2 transition-colors duration-300 line-clamp-2">
-                    {p.title}
-                  </p>
-                  <p className="font-main text-gold/80 group-hover:text-gold text-[11px] tracking-[2px] transition-colors duration-300">
-                    {fmt(amount, currencyCode)}
-                  </p>
-                </button>
-              );
-            })}
+            {visible.map(p => (
+              <ProductCard key={p.id} p={p} onSelect={() => onSelectProduct(p)} />
+            ))}
           </div>
 
-          {/* Shop all CTA */}
           {onShopAll && (
             <div className="mt-16 md:mt-20 text-center">
               <div className="w-full h-px bg-white/[0.07] mb-12" />

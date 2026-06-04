@@ -14,11 +14,126 @@ function fmt(amount: string, currency: string) {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(parseFloat(amount));
 }
 
+function isProductSoldOut(p: ShopifyProduct) {
+  return p.variants.edges.length > 0 && p.variants.edges.every(e => !e.node.availableForSale);
+}
+
 const TABS: { label: string; value: GenderFilter }[] = [
   { label: 'All',     value: 'all'   },
   { label: "Men's",   value: 'men'   },
   { label: "Women's", value: 'women' },
 ];
+
+const ShopProductCard: React.FC<{
+  p: ShopifyProduct;
+  onSelect: () => void;
+}> = ({ p, onSelect }) => {
+  const [hov, setHov] = useState(false);
+  const img1 = p.images.edges[0]?.node;
+  const img2 = p.images.edges[1]?.node;
+  const extraImages = p.images.edges.length > 2 ? p.images.edges.length - 1 : 0;
+  const { amount, currencyCode } = p.priceRange.minVariantPrice;
+  const soldOut = isProductSoldOut(p);
+
+  return (
+    <button
+      onClick={onSelect}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      className="group text-left interactive w-full"
+    >
+      <div className="relative w-full aspect-[3/4] overflow-hidden bg-card-bg mb-3">
+
+        {/* Primary image */}
+        {img1 && (
+          <img
+            src={img1.url}
+            alt={img1.altText ?? p.title}
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              opacity: hov && img2 ? 0 : 1,
+              transform: hov ? (img2 ? 'scale(1.06)' : 'scale(1.07)') : 'scale(1)',
+              transition: 'opacity 0.65s ease, transform 0.85s ease',
+            }}
+          />
+        )}
+
+        {/* Secondary image */}
+        {img2 && (
+          <img
+            src={img2.url}
+            alt={img2.altText ?? p.title}
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              opacity: hov ? 1 : 0,
+              transform: hov ? 'scale(1)' : 'scale(1.06)',
+              transition: 'opacity 0.65s ease, transform 0.85s ease',
+            }}
+          />
+        )}
+
+        {!img1 && (
+          <div className="w-full h-full flex items-center justify-center">
+            <span className="font-display text-white/10 text-xs uppercase tracking-widest">No Image</span>
+          </div>
+        )}
+
+        {/* Sold Out badge */}
+        {soldOut && (
+          <div className="absolute top-3 left-3 z-10 bg-dark-wood/90 backdrop-blur-sm px-3 py-1.5 border border-white/10">
+            <span className="font-display text-[8px] tracking-[3px] text-cream/55 uppercase">Sold Out</span>
+          </div>
+        )}
+
+        {/* Image count */}
+        {extraImages > 0 && (
+          <div className="absolute top-3 right-3 z-10 bg-black/50 backdrop-blur-sm w-7 h-7 flex items-center justify-center">
+            <span className="font-main text-[9px] text-cream/70">+{extraImages}</span>
+          </div>
+        )}
+
+        {/* Quick Shop bar */}
+        <div
+          className="absolute bottom-0 left-0 right-0 z-10 bg-gold flex items-center justify-center py-3"
+          style={{
+            transform: hov ? 'translateY(0)' : 'translateY(100%)',
+            transition: 'transform 0.35s cubic-bezier(0.33, 1, 0.68, 1)',
+          }}
+        >
+          <span className="font-display text-[9px] tracking-[5px] text-card-bg uppercase">
+            Quick Shop
+          </span>
+        </div>
+
+        {/* Border glow */}
+        <div
+          className="absolute inset-0 pointer-events-none border"
+          style={{
+            borderColor: hov ? 'rgba(212,175,55,0.45)' : 'rgba(255,255,255,0.06)',
+            transition: 'border-color 0.4s ease',
+          }}
+        />
+      </div>
+
+      <h3
+        className="font-display text-[10px] md:text-sm uppercase tracking-[0.08em] leading-snug mb-1 md:mb-2 line-clamp-2 transition-colors duration-300"
+        style={{ color: hov ? '#f5f0e6' : 'rgba(245,240,230,0.65)' }}
+      >
+        {p.title}
+      </h3>
+      <p
+        className="font-main text-[10px] md:text-[11px] tracking-[2px] md:tracking-[3px] transition-colors duration-300"
+        style={{ color: hov ? '#d4af37' : 'rgba(212,175,55,0.70)' }}
+      >
+        {fmt(amount, currencyCode)}
+      </p>
+    </button>
+  );
+};
 
 const ShopView: React.FC<ShopViewProps> = ({ products, loading, onBack, onSelectProduct, initialFilter = 'all' }) => {
   const [filter, setFilter] = useState<GenderFilter>(initialFilter);
@@ -99,40 +214,9 @@ const ShopView: React.FC<ShopViewProps> = ({ products, loading, onBack, onSelect
           </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 md:gap-x-5 gap-y-10 md:gap-y-14">
-            {visible.map(p => {
-              const img = p.images.edges[0]?.node;
-              const { amount, currencyCode } = p.priceRange.minVariantPrice;
-              return (
-                <button
-                  key={p.id}
-                  onClick={() => onSelectProduct(p)}
-                  className="group text-left interactive w-full"
-                >
-                  <div className="relative w-full aspect-[3/4] overflow-hidden bg-card-bg mb-3">
-                    {img ? (
-                      <img
-                        src={img.url}
-                        alt={img.altText ?? p.title}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-cover brightness-90 group-hover:brightness-105 group-hover:scale-[1.04] transition-all duration-700"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <span className="font-display text-white/10 text-xs uppercase tracking-widest">No Image</span>
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
-                  </div>
-                  <h3 className="font-display text-[10px] md:text-sm text-white/65 group-hover:text-white/90 uppercase tracking-[0.08em] leading-snug mb-1 md:mb-2 transition-colors duration-300 line-clamp-2">
-                    {p.title}
-                  </h3>
-                  <p className="font-main text-gold/70 group-hover:text-gold text-[10px] md:text-[11px] tracking-[2px] md:tracking-[3px] transition-colors duration-300">
-                    {fmt(amount, currencyCode)}
-                  </p>
-                </button>
-              );
-            })}
+            {visible.map(p => (
+              <ShopProductCard key={p.id} p={p} onSelect={() => onSelectProduct(p)} />
+            ))}
           </div>
         )}
       </div>
