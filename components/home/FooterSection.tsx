@@ -117,12 +117,17 @@ const FooterSection: React.FC = () => {
                 </a>
               </li>
               <li>
+                <a href="tel:+19158729526" className="font-main text-[11px] text-cream/35 hover:text-gold transition-colors duration-300 interactive tracking-wider">
+                  {CONTACT.phone}
+                </a>
+              </li>
+              <li>
                 <a href={CONTACT.whatsapp} target="_blank" rel="noreferrer" className="font-main text-[11px] text-cream/35 hover:text-gold transition-colors duration-300 interactive tracking-wider">
                   WhatsApp
                 </a>
               </li>
               <li>
-                <p className="font-main text-[11px] text-cream/25 tracking-wider">El Paso, Texas</p>
+                <p className="font-main text-[11px] text-cream/25 tracking-wider">Dallas, TX 75207</p>
               </li>
             </ul>
 

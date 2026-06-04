@@ -2,18 +2,22 @@ import React from 'react';
 import { CONTACT } from '../../constants';
 import { useReveal } from '../../src/hooks/useReveal';
 
-// TODO: Update with real store info
 const STORE = {
-  name:    'Ranchers Boot Co. — El Paso',
-  address: '1234 Western Ave',        // ← update
-  city:    'El Paso, Texas 79901',    // ← update
+  name:    'Ranchers Boot Co.',
+  address: '2100 Stemmons Freeway, 10963-WTC',
+  city:    'Dallas, TX 75207',
   hours: [
     { day: 'Mon – Fri',  time: '9:00 AM – 7:00 PM' },
     { day: 'Saturday',   time: '9:00 AM – 5:00 PM' },
     { day: 'Sunday',     time: 'By Appointment'     },
   ],
-  phone: '+1 (915) 000-0000',         // ← update
 };
+
+const MAPS_EMBED =
+  'https://www.google.com/maps?q=2100+Stemmons+Freeway,+Dallas,+TX+75207&output=embed';
+
+const MAPS_LINK =
+  'https://maps.google.com/?q=2100+Stemmons+Freeway,+Dallas,+TX+75207';
 
 const StoreSection: React.FC = () => {
   const leftRef  = useReveal() as React.RefObject<HTMLDivElement>;
@@ -32,36 +36,27 @@ const StoreSection: React.FC = () => {
 
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch">
 
-        {/* Map placeholder */}
-        <div ref={leftRef} className="reveal relative overflow-hidden bg-dark-3 border border-white/[0.06]" style={{ minHeight: 380 }}>
-          {/* Decorative map placeholder */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-8">
-            {/* Pin icon */}
-            <svg className="w-10 h-10 text-gold/30 mb-6" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-              <circle cx="12" cy="9" r="2.5" strokeLinecap="round"/>
-            </svg>
-            <p className="font-display text-lg md:text-xl text-cream/30 uppercase tracking-[0.1em] mb-2">
-              El Paso, Texas
-            </p>
-            <p className="font-main text-[10px] text-cream/20 tracking-[3px] uppercase mb-8">
-              Border Country · Est. 1985
-            </p>
-            <a
-              href={`https://maps.google.com/?q=El+Paso+Texas`}
-              target="_blank"
-              rel="noreferrer"
-              className="font-display text-[9px] tracking-[4px] text-gold/60 hover:text-gold uppercase border border-gold/25 hover:border-gold/50 px-8 py-3 transition-all duration-300"
-            >
-              Open in Maps →
-            </a>
-          </div>
-
-          {/* Corner decorations */}
-          <div className="absolute top-4 left-4 w-6 h-6 border-t border-l border-gold/20" />
-          <div className="absolute top-4 right-4 w-6 h-6 border-t border-r border-gold/20" />
-          <div className="absolute bottom-4 left-4 w-6 h-6 border-b border-l border-gold/20" />
-          <div className="absolute bottom-4 right-4 w-6 h-6 border-b border-r border-gold/20" />
+        {/* Google Maps embed */}
+        <div ref={leftRef} className="reveal relative overflow-hidden border border-white/[0.06]" style={{ minHeight: 400 }}>
+          <iframe
+            title="Ranchers Boot Co. Location"
+            src={MAPS_EMBED}
+            width="100%"
+            height="100%"
+            style={{ border: 0, minHeight: 400, display: 'block', filter: 'grayscale(30%) invert(5%)' }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+          {/* Open in Maps overlay button */}
+          <a
+            href={MAPS_LINK}
+            target="_blank"
+            rel="noreferrer"
+            className="absolute bottom-4 right-4 font-display text-[8px] tracking-[3px] text-card-bg bg-gold hover:bg-cream uppercase transition-colors duration-300 px-4 py-2.5 interactive"
+          >
+            Open in Maps →
+          </a>
         </div>
 
         {/* Store info */}
@@ -72,15 +67,20 @@ const StoreSection: React.FC = () => {
           </h3>
 
           {/* Address */}
-          <div className="mb-8 pb-8 border-b border-white/[0.07]">
+          <div className="mb-7 pb-7 border-b border-white/[0.07]">
             <p className="font-main text-[9px] tracking-[5px] text-gold/55 uppercase mb-3">Address</p>
-            <p className="font-main text-sm text-cream/65 leading-relaxed tracking-wide">
+            <a
+              href={MAPS_LINK}
+              target="_blank"
+              rel="noreferrer"
+              className="font-main text-sm text-cream/65 hover:text-cream leading-relaxed tracking-wide transition-colors duration-300 interactive"
+            >
               {STORE.address}<br />{STORE.city}
-            </p>
+            </a>
           </div>
 
           {/* Hours */}
-          <div className="mb-8 pb-8 border-b border-white/[0.07]">
+          <div className="mb-7 pb-7 border-b border-white/[0.07]">
             <p className="font-main text-[9px] tracking-[5px] text-gold/55 uppercase mb-4">Store Hours</p>
             <div className="space-y-2.5">
               {STORE.hours.map(h => (
@@ -89,6 +89,28 @@ const StoreSection: React.FC = () => {
                   <span className="font-main text-[11px] text-cream/70 tracking-wider">{h.time}</span>
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* Phone & Email — clickable */}
+          <div className="mb-8 pb-7 border-b border-white/[0.07] space-y-4">
+            <div>
+              <p className="font-main text-[9px] tracking-[5px] text-gold/55 uppercase mb-2">Phone</p>
+              <a
+                href={`tel:+19158729526`}
+                className="font-main text-sm text-cream/70 hover:text-gold transition-colors duration-300 interactive tracking-wider"
+              >
+                {CONTACT.phone}
+              </a>
+            </div>
+            <div>
+              <p className="font-main text-[9px] tracking-[5px] text-gold/55 uppercase mb-2">Email</p>
+              <a
+                href={`mailto:${CONTACT.email}`}
+                className="font-main text-sm text-cream/70 hover:text-gold transition-colors duration-300 interactive tracking-wider break-all"
+              >
+                {CONTACT.email}
+              </a>
             </div>
           </div>
 
@@ -106,10 +128,10 @@ const StoreSection: React.FC = () => {
               WhatsApp
             </a>
             <a
-              href={`mailto:${CONTACT.email}`}
+              href={`tel:+19158729526`}
               className="flex items-center justify-center gap-2 font-display text-[9px] tracking-[4px] text-cream/60 hover:text-gold uppercase border border-white/15 hover:border-gold/40 transition-all duration-300 px-8 py-3.5 interactive"
             >
-              Email Us
+              Call Us
             </a>
           </div>
 

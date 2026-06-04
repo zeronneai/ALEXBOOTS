@@ -10,9 +10,10 @@ export const ASSETS = {
 };
 
 export const CONTACT = {
-  email:     'info@ranchersbootco.com',
+  email:     'Ranchersbootco@gmail.com',
+  phone:     '(915) 872-9526',
   whatsapp:  'https://wa.me/19158729526',
   instagram: 'https://instagram.com/ranchersbootco',
   facebook:  'https://www.facebook.com/ranchersbootco',
-  address:   'El Paso, Texas — Est. 1985',
+  address:   '2100 Stemmons Freeway, 10963-WTC\nDallas, TX 75207',
 };
