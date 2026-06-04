@@ -3,44 +3,46 @@
 @tailwind utilities;
 
 :root {
-  --gold: #d4af37;
-  --dark-wood: #0f0c08;
-  --card-bg: #14110e;
-  --text-light: #f0f0f0;
+  --gold:      #d4af37;
+  --dark-wood: #1a1512;
+  --cream:     #f5f0e6;
+  --leather:   #6b4423;
+}
+
+/* ── Base ──────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background-color: var(--dark-wood);
-  color: var(--text-light);
+  color: var(--cream);
   cursor: default;
-  overflow: hidden;
   margin: 0;
   padding: 0;
-  height: 100vh;       /* fallback */
-  height: 100dvh;      /* respects mobile browser UI */
-  width: 100vw;
+  min-height: 100dvh;
+  width: 100%;
   font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
 }
 
 /* Pointer cursor on every interactive element */
-a, button, .interactive, .interactable, [role="button"] {
+a, button, .interactive, [role="button"] {
   cursor: pointer;
 }
 
-/* Noise Overlay */
+/* ── Noise overlay ─────────────────────────────────── */
 .noise {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   pointer-events: none;
   z-index: 500;
-  opacity: 0.04;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
 }
 
-/* Touch-friendly scrollable containers */
+/* ── Scrollbars ────────────────────────────────────── */
 .touch-scroll-x {
   overflow-x: auto;
   overflow-y: hidden;
@@ -59,12 +61,6 @@ a, button, .interactive, .interactable, [role="button"] {
 }
 .touch-scroll-y::-webkit-scrollbar { display: none; }
 
-/* All overflow-hidden elements should allow touch pass-through */
-[style*="overflow: hidden"], [style*="overflow:hidden"] {
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Hide scrollbars globally on overflow-auto elements */
 .overflow-y-auto, .overflow-x-auto {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -72,19 +68,47 @@ a, button, .interactive, .interactable, [role="button"] {
 .overflow-y-auto::-webkit-scrollbar,
 .overflow-x-auto::-webkit-scrollbar { display: none; }
 
-/* Transition Curtain */
+/* ── Scroll-reveal animation ───────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+.reveal-delay-1 { transition-delay: 0.12s; }
+.reveal-delay-2 { transition-delay: 0.24s; }
+.reveal-delay-3 { transition-delay: 0.36s; }
+.reveal-delay-4 { transition-delay: 0.48s; }
+
+/* ── Product card hover border glow ────────────────── */
+.product-card-border {
+  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0);
+  transition: box-shadow 0.4s ease;
+}
+.product-card-border:hover {
+  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.35);
+}
+
+/* ── Transition curtain ────────────────────────────── */
 .transition-curtain {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   background-color: var(--gold);
   z-index: 5000;
   transform: scaleY(0);
   transform-origin: bottom;
   pointer-events: none;
 }
-.transition-curtain.active {
-  pointer-events: auto;
+
+/* ── Hamburger lines ───────────────────────────────── */
+.ham-line {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background-color: var(--cream);
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
