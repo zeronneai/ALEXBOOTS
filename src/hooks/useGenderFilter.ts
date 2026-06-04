@@ -15,8 +15,5 @@ export function getProductGender(p: ShopifyProduct): 'men' | 'women' | 'untagged
 
 export function filterByGender(products: ShopifyProduct[], filter: GenderFilter): ShopifyProduct[] {
   if (filter === 'all') return products;
-  return products.filter(p => {
-    const g = getProductGender(p);
-    return g === filter || g === 'untagged';
-  });
+  return products.filter(p => getProductGender(p) === filter);
 }
