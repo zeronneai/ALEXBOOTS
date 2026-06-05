@@ -5,7 +5,7 @@ const STEPS = [
   {
     num: '01',
     title: 'Material Selection',
-    desc: 'We source the finest exotic leathers — ostrich, caiman, lizard, and full-grain cowhide — directly from trusted tanneries along the border.',
+    desc: 'We source the finest exotic leathers — ostrich, caiman, lizard, and full-grain cowhide — from trusted tanneries and premium suppliers committed to quality.',
   },
   {
     num: '02',
@@ -20,7 +20,7 @@ const STEPS = [
   {
     num: '04',
     title: 'Hand Finishing',
-    desc: 'Final shaping, welt stitching, and hand-polishing. Each boot leaves the workshop only when it meets the standard of 40 years of tradition.',
+    desc: 'Final shaping, welt stitching, and hand-polishing. Each boot leaves the workshop only when it meets the uncompromising standard of Ranchers Boot Co.',
   },
 ];
 

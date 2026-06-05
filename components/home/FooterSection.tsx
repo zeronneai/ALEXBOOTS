@@ -47,8 +47,8 @@ const FooterSection: React.FC = () => {
               Ranchers Boot Co.
             </p>
             <p className="font-main text-[10px] text-cream/35 leading-relaxed tracking-wider mb-8 max-w-[200px]">
-              Est. 1985 · El Paso, Texas.<br />
-              Handcrafted exotic leather boots for those who live the tradition.
+              Quality should never go out of style.<br />
+              Premium boots honoring the traditions of the American West.
             </p>
             <div className="flex gap-5">
               {[
@@ -166,7 +166,7 @@ const FooterSection: React.FC = () => {
           © {new Date().getFullYear()} Ranchers Boot Co. All rights reserved.
         </p>
         <p className="font-main text-[9px] text-cream/15 tracking-[2px] uppercase">
-          Handcrafted in El Paso, Texas
+          Handcrafted by Expert Artisans
         </p>
       </div>
     </footer>

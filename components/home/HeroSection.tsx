@@ -58,7 +58,7 @@ const HeroSection: React.FC<Props> = ({ onShopClick, isReady }) => {
           className="font-main font-semibold text-[11px] md:text-[13px] tracking-[7px] text-gold uppercase mb-8 md:mb-10"
           style={{ opacity: 0 }}
         >
-          Est. 1985 &nbsp;·&nbsp; El Paso, Texas
+          Quality &nbsp;·&nbsp; Craftsmanship &nbsp;·&nbsp; The American West
         </p>
 
         {/* Large logo */}
@@ -89,7 +89,7 @@ const HeroSection: React.FC<Props> = ({ onShopClick, isReady }) => {
           className="font-main font-semibold text-sm md:text-base text-cream/90 mb-12 md:mb-16 max-w-sm mx-auto leading-relaxed tracking-[4px] uppercase"
           style={{ opacity: 0 }}
         >
-          Handcrafted leather boots.<br />Tradition since 1985.
+          Handcrafted leather boots.<br />Honoring the American West.
         </p>
 
         {/* Buttons */}

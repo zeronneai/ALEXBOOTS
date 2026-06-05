@@ -57,7 +57,7 @@ const Navbar: React.FC<NavbarProps> = ({
         <div className={`fixed top-0 w-full z-[2200] transition-all duration-500 ${scrolled ? 'opacity-0 pointer-events-none -translate-y-full' : 'opacity-100'}`}>
           <div className="bg-gold flex items-center justify-center px-4 py-2.5">
             <p className="font-display text-[9px] md:text-[10px] tracking-[5px] text-card-bg uppercase text-center">
-              Free Shipping on Orders $150+ &nbsp;·&nbsp; Handcrafted in El Paso, TX
+              Free Shipping on Orders $150+ &nbsp;·&nbsp; Handcrafted by Expert Artisans
             </p>
           </div>
         </div>
@@ -207,7 +207,7 @@ const Navbar: React.FC<NavbarProps> = ({
         </nav>
         <div className="absolute bottom-14 flex flex-col items-center gap-2">
           <div className="w-12 h-px bg-gold/30 mb-4" />
-          <p className="font-main text-[9px] tracking-[4px] text-cream/25 uppercase">Est. 1985 · El Paso, TX</p>
+          <p className="font-main text-[9px] tracking-[4px] text-cream/25 uppercase">Ranchers Boot Co. · The American West</p>
         </div>
       </div>
     </>

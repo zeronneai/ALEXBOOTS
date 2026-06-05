@@ -12,7 +12,7 @@ const GALLERY_ITEMS: { idx: number; caption: string; span: SpanType }[] = [
   { idx: 4, caption: 'Hand Stitching',      span: 'normal' },
   { idx: 5, caption: 'Exotic Leathers',     span: 'wide'   },
   { idx: 6, caption: 'Custom Orders',       span: 'normal' },
-  { idx: 7, caption: 'El Paso Heritage',    span: 'normal' },
+  { idx: 7, caption: 'American Heritage',   span: 'normal' },
 ];
 
 const spanClasses: Record<SpanType, string> = {

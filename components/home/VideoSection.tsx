@@ -39,7 +39,7 @@ const VideoSection: React.FC = () => {
         <div className="w-16 h-px bg-gold/50 mb-8" />
 
         <p className="font-main font-semibold text-[12px] md:text-sm text-cream/80 tracking-[4px] uppercase max-w-xs leading-relaxed">
-          El Paso, Texas &nbsp;·&nbsp; Est. 1985<br />Every stitch. Every cut. Every pair.
+          The American West &nbsp;·&nbsp; Ranchers Boot Co.<br />Every stitch. Every cut. Every pair.
         </p>
 
         {/* Decorative marks */}

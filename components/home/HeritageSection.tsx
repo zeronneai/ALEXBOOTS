@@ -3,9 +3,9 @@ import { ASSETS } from '../../constants';
 import { useReveal } from '../../src/hooks/useReveal';
 
 const STATS = [
-  { value: '40+', label: 'Years of Craft' },
   { value: '100%', label: 'Handmade' },
-  { value: 'EP', label: 'El Paso, TX' },
+  { value: 'Artisan', label: 'Crafted' },
+  { value: 'USA', label: 'American West' },
 ];
 
 const HeritageSection: React.FC = () => {
@@ -40,14 +40,14 @@ const HeritageSection: React.FC = () => {
             Our Heritage
           </p>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-cream uppercase leading-[0.95] tracking-[0.03em] mb-8">
-            The Art of<br />the Border
+            Built on<br />Belief
           </h2>
           <div className="w-12 h-px bg-gold/50 mb-8" />
           <p className="font-main text-sm md:text-[15px] text-cream/80 leading-relaxed mb-5 tracking-wide">
-            Handcrafted in the heart of the border. Every pair tells a story of tradition, leather, and legacy — forged across decades in El Paso, Texas and the borderlands of Juárez.
+            Ranchers Boot Co. was founded with a simple belief: quality should never go out of style. Every pair is crafted by experienced artisans who have dedicated their lives to the art of bootmaking.
           </p>
           <p className="font-main text-sm md:text-[15px] text-cream/80 leading-relaxed mb-12 tracking-wide">
-            From the first cut of exotic skin to the final hand-stitched welt, every boot carries the mark of a craftsman who has dedicated their life to this art. No two pairs are identical. That is the point.
+            Combining time-honored techniques, premium materials, and uncompromising attention to detail, we create boots built to withstand the demands of everyday life while honoring the traditions of the American West.
           </p>
           <button
             onClick={() => document.getElementById('footer')?.scrollIntoView({ behavior: 'smooth' })}
