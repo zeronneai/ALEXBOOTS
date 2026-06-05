@@ -10,7 +10,7 @@ const VideoSection: React.FC = () => {
       {/* Background */}
       <div className="absolute inset-0">
         <img
-          src={ASSETS.WOMEN_BG}
+          src={ASSETS.PROCESS_BG}
           alt=""
           loading="lazy"
           decoding="async"

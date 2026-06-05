@@ -23,7 +23,7 @@ const HeritageSection: React.FC = () => {
         <div ref={imgRef} className="reveal w-full md:w-[52%] md:pr-16 flex-shrink-0">
           <div className="relative aspect-[4/5] overflow-hidden">
             <img
-              src={ASSETS.MEN_BG}
+              src={ASSETS.HERITAGE_BG}
               alt="Ranchers Boot Co. Heritage"
               loading="lazy"
               decoding="async"
