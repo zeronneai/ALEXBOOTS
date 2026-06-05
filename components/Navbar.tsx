@@ -19,11 +19,11 @@ const CartIcon = ({ size = 18 }: { size?: number }) => (
 );
 
 const NAV_LINKS = [
-  { label: 'Collection', id: 'collection'   },
-  { label: 'Heritage',   id: 'heritage'     },
-  { label: 'Gallery',    id: 'gallery'      },
-  { label: 'Visit Us',   id: 'store'        },
-  { label: 'Contact',    id: 'footer'       },
+  { label: 'Collection', id: 'collection' },
+  { label: 'Heritage',   id: 'heritage'   },
+  { label: 'Gallery',    id: 'gallery'    },
+  { label: 'Visit Us',   id: 'store'      },
+  { label: 'Contact',    id: 'footer'     },
 ];
 
 const Navbar: React.FC<NavbarProps> = ({
@@ -72,7 +72,62 @@ const Navbar: React.FC<NavbarProps> = ({
           ? 'bg-dark-wood/97 backdrop-blur-md border-b border-white/[0.06]'
           : ''}`}
       >
-        <div className="flex items-center justify-between px-5 md:px-12 py-3.5 md:py-4">
+        {/* ── MOBILE layout: hamburger | logo (center) | cart + shop ── */}
+        <div className="md:hidden flex items-center px-5 py-3.5">
+
+          {/* Left — hamburger */}
+          <button
+            onClick={() => setMenuOpen(o => !o)}
+            className="flex flex-col gap-[5px] w-6 interactive flex-shrink-0"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          >
+            <span className={`ham-line ${menuOpen ? 'translate-y-[7px] rotate-45' : ''}`} />
+            <span className={`ham-line ${menuOpen ? 'opacity-0' : ''}`} />
+            <span className={`ham-line ${menuOpen ? '-translate-y-[7px] -rotate-45' : ''}`} />
+          </button>
+
+          {/* Center — logo (absolutely centered) */}
+          <div className="absolute left-1/2 -translate-x-1/2">
+            <button
+              onClick={() => { onHomeClick(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className="interactive"
+              aria-label="Home"
+            >
+              <img
+                src={ASSETS.LOGO_ICON}
+                alt="Ranchers Boot Co."
+                loading="eager"
+                decoding="async"
+                className="h-9 w-auto object-contain drop-shadow-[0_0_14px_rgba(212,175,55,0.3)]"
+              />
+            </button>
+          </div>
+
+          {/* Right — cart + Shop Now */}
+          <div className="ml-auto flex items-center gap-4">
+            <button
+              onClick={onCartClick}
+              className="relative text-cream/70 hover:text-gold transition-colors duration-300 interactive"
+              aria-label="Open cart"
+            >
+              <CartIcon size={19} />
+              {itemCount > 0 && (
+                <span className="absolute -top-2 -right-2 w-4 h-4 bg-gold text-card-bg font-main text-[8px] font-bold rounded-full flex items-center justify-center leading-none">
+                  {itemCount > 9 ? '9+' : itemCount}
+                </span>
+              )}
+            </button>
+            <button
+              onClick={onShopClick}
+              className="font-display text-[8px] tracking-[3px] text-card-bg bg-gold hover:bg-gold-light uppercase transition-colors duration-300 interactive px-4 py-2"
+            >
+              Shop
+            </button>
+          </div>
+        </div>
+
+        {/* ── DESKTOP layout: logo | links | shop button ── */}
+        <div className="hidden md:flex items-center justify-between px-12 py-4">
 
           {/* Logo */}
           <button
@@ -85,12 +140,12 @@ const Navbar: React.FC<NavbarProps> = ({
               alt="Ranchers Boot Co."
               loading="eager"
               decoding="async"
-              className="h-9 md:h-11 w-auto object-contain drop-shadow-[0_0_14px_rgba(212,175,55,0.3)]"
+              className="h-11 w-auto object-contain drop-shadow-[0_0_14px_rgba(212,175,55,0.3)]"
             />
           </button>
 
-          {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-10 lg:gap-12">
+          {/* Nav links */}
+          <div className="flex items-center gap-10 lg:gap-12">
             {NAV_LINKS.map(({ label, id }) => (
               <button
                 key={label}
@@ -101,16 +156,10 @@ const Navbar: React.FC<NavbarProps> = ({
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold transition-all duration-400 group-hover:w-full" />
               </button>
             ))}
-            <button
-              onClick={onShopClick}
-              className="font-display text-[9px] tracking-[4px] text-card-bg bg-gold hover:bg-gold-light uppercase transition-colors duration-300 interactive px-5 py-2"
-            >
-              Shop Now
-            </button>
           </div>
 
-          {/* Right: cart + hamburger */}
-          <div className="flex items-center gap-5 md:gap-6">
+          {/* Right — cart + Shop Now */}
+          <div className="flex items-center gap-5">
             <button
               onClick={onCartClick}
               className="relative text-cream/60 hover:text-gold transition-colors duration-300 interactive"
@@ -123,18 +172,13 @@ const Navbar: React.FC<NavbarProps> = ({
                 </span>
               )}
             </button>
-
             <button
-              onClick={() => setMenuOpen(o => !o)}
-              className="md:hidden flex flex-col gap-[5px] w-6 interactive"
-              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              onClick={onShopClick}
+              className="font-display text-[9px] tracking-[4px] text-card-bg bg-gold hover:bg-gold-light uppercase transition-colors duration-300 interactive px-5 py-2"
             >
-              <span className={`ham-line ${menuOpen ? 'translate-y-[7px] rotate-45' : ''}`} />
-              <span className={`ham-line ${menuOpen ? 'opacity-0' : ''}`} />
-              <span className={`ham-line ${menuOpen ? '-translate-y-[7px] -rotate-45' : ''}`} />
+              Shop Now
             </button>
           </div>
-
         </div>
       </nav>
 
